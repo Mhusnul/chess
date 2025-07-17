@@ -9,6 +9,7 @@ function Home() {
       <Navbar />
       <Hero />
       <Achievement />
+      <Aboute />
     </div>
   );
 }
