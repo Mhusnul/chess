@@ -13,8 +13,8 @@ function Home() {
       <div
         style={{ backgroundImage: `url(${board})`, backgroundSize: "cover" }}
       >
-        <Achievement />
         <Aboute />
+        <Achievement />
       </div>
       <Other />
     </div>

@@ -1,9 +1,96 @@
 import React from "react";
+import profile from "../../assets/chess-player.jpg";
+import { CircleArrowOutUpRight } from "lucide-react";
 
 function Other() {
   return (
-    <div>
-      <h1>other</h1>
+    <div className="text-white p-5 min-h-screen">
+      <h1 className="text-3xl font-semibold mb-4 uppercase">
+        Lebih Dekat dengan Saya
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 min-h-screen">
+        {/* Foto Kiri */}
+        <div className="overflow-hidden rounded-xl h-80">
+          <img
+            src={profile}
+            alt="profile"
+            className="object-cover w-full h-full rounded-xl"
+          />
+        </div>
+
+        {/* Tentang Saya */}
+        <div className="grid gap-3 h-full">
+          <div className="bg-[#393E46]/30 backdrop-blur-sm p-4 rounded-lg">
+            <h2 className="text-lg font-bold mb-2">Kelas Online</h2>
+            <p className="text-sm leading-relaxed">
+              Bergabunglah dalam kelas online saya yang dirancang untuk semua
+              level — dari pemula hingga pemain berpengalaman. Materi meliputi
+              strategi pembukaan, taktik jitu, dan simulasi pertandingan
+              interaktif. Akses kelas kapan saja, di mana saja.
+            </p>
+            <div className="card-actions justify-end">
+              <button className="flex items-center gap-2 hover:underline">
+                Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-white/30 backdrop-blur-sm p-4 rounded-lg">
+            <h2 className="text-lg font-bold mb-2">Karya & Buku</h2>
+            <p className="text-sm leading-relaxed">
+              Saya telah menulis buku berjudul{" "}
+              <span className="font-semibold">“Langkah Strategis”</span> yang
+              membahas taktik catur dan pengembangan mental melalui permainan.
+              Buku ini tersedia dalam bentuk fisik maupun digital.
+            </p>
+            <div className="card-actions justify-end">
+              <button className="flex items-center gap-2 hover:underline">
+                Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Konten Digital */}
+        <div className="grid gap-3 h-full">
+          <div className="bg-[#393E46]/30 backdrop-blur-sm p-4 rounded-lg">
+            <h2 className="text-lg font-bold mb-2">Konten Digital</h2>
+            <p className="text-sm leading-relaxed">
+              Saya aktif membuat video edukasi dan hiburan tentang catur di
+              TikTok dan YouTube, dengan total jutaan views. Konten saya fokus
+              pada pembelajaran yang menyenangkan dan menghibur.
+            </p>
+            <div className="card-actions justify-end">
+              <button className="flex items-center gap-2 hover:underline">
+                Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
+              </button>
+            </div>
+          </div>
+          <div className="bg-white/30 backdrop-blur-sm p-4 rounded-lg">
+            <h2 className="text-lg font-bold mb-2">Misi Saya</h2>
+            <p className="text-sm leading-relaxed">
+              Menyebarkan semangat berpikir strategis, kedisiplinan, dan
+              ketekunan melalui permainan catur. Saya ingin menjadikan catur
+              sebagai gaya hidup positif bagi generasi muda.
+            </p>
+            <div className="card-actions justify-end">
+              <button className="flex items-center gap-2 hover:underline">
+                Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Foto Kanan */}
+        <div className="overflow-hidden rounded-xl h-80">
+          <img
+            src={profile}
+            alt="profile"
+            className="object-cover w-full h-full rounded-xl"
+          />
+        </div>
+      </div>
     </div>
   );
 }
