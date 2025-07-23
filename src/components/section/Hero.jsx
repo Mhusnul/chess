@@ -5,7 +5,7 @@ import TextCursor from "../common/TextCursor";
 function Hero() {
   return (
     <div
-      className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white mt-7"
+      className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white pt-7"
       style={{
         backgroundImage: `url(${board})`,
       }}
@@ -29,7 +29,7 @@ function Hero() {
       {/* Bawah Tengah */}
       <div className="absolute bottom-15 left-1/2 transform -translate-x-1/2 z-10 text-center max-w-screen">
         <ScrollVelocity
-          texts={["Muhamad Husnul", "Scroll Down"]}
+          texts={["Muhamad Husnul", "Chess Player"]}
           velocity={50}
           className="custom-scroll-text"
         />

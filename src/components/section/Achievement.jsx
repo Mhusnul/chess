@@ -1,7 +1,5 @@
 import React from "react";
 import { CircleArrowOutUpRight } from "lucide-react";
-import board from "../../assets/chess-board.png";
-import MagicBento from "../common/MagicBento";
 
 const achievements = [
   {
@@ -44,10 +42,7 @@ function AchievementCard({ title, description, bgColor }) {
 
 function AchievementGrid() {
   return (
-    <div
-      style={{ backgroundImage: `url(${board})` }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto p-4 bg-cover bg-center"
-    >
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto p-4 bg-cover bg-center">
       {achievements.map((item, index) => (
         <AchievementCard
           key={index}
@@ -56,7 +51,7 @@ function AchievementGrid() {
           bgColor={
             index % 2 === 0
               ? "bg-[#393E46]/30 text-white"
-              : "bg-white text-black"
+              : "bg-white/30 text-black"
           }
         />
       ))}
