@@ -4,7 +4,10 @@ import { CircleArrowOutUpRight } from "lucide-react";
 
 function Aboute() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-white p-4">
+    <div
+      id="about"
+      className="grid grid-cols-1 md:grid-cols-2 gap-2 text-white p-4"
+    >
       <div className="bg-[#393E46]/30 backdrop-blur-sm shadow-md p-4 rounded-xl">
         <h2 className="text-5xl font-bold tracking-wider uppercase bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent drop-shadow-lg">
           ABOUTE

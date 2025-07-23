@@ -5,6 +5,7 @@ import TextCursor from "../common/TextCursor";
 function Hero() {
   return (
     <div
+      id="home"
       className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white pt-7"
       style={{
         backgroundImage: `url(${board})`,
