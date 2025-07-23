@@ -1,6 +1,6 @@
 import React from "react";
 import profile from "../../assets/chess-player.jpg";
-import board from "../../assets/chess-board.png";
+import { CircleArrowOutUpRight } from "lucide-react";
 
 function Aboute() {
   return (
@@ -26,6 +26,11 @@ function Aboute() {
             adipisicing elit. Voluptas fugiat earum in consequatur, tenetur,
             saepe nisi.
           </p>
+        </div>
+        <div className="card-actions justify-end">
+          <button className="flex items-center gap-2 hover:underline">
+            Selengkapnya <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
+          </button>
         </div>
       </div>
       <div className="h-96 bg-white/30 backdrop-blur-sm rounded-xl overflow-hidden">

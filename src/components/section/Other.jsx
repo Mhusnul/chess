@@ -1,19 +1,31 @@
 import React from "react";
-import profile from "../../assets/chess-player.jpg";
+import chessbg2 from "../../assets/chess-bg2.jpg";
+import chessbg3 from "../../assets/chess-bg3.jpg";
 import { CircleArrowOutUpRight } from "lucide-react";
+import TextType from "../common/TextType";
 
 function Other() {
   return (
     <div className="text-white p-5 min-h-screen">
-      <h1 className="text-3xl font-semibold mb-4 uppercase">
-        Lebih Dekat dengan Saya
-      </h1>
+      <div className="text-center mb-5 font-bold uppercase text-3xl">
+        <TextType
+          text={[
+            "Mari Kenal Lebih Dekat",
+            "Dengan Saya",
+            "Muhamad Husnul Maad!",
+          ]}
+          typingSpeed={100}
+          pauseDuration={1500}
+          showCursor={true}
+          cursorCharacter="|"
+        />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 min-h-screen">
         {/* Foto Kiri */}
         <div className="overflow-hidden rounded-xl h-80">
           <img
-            src={profile}
+            src={chessbg2}
             alt="profile"
             className="object-cover w-full h-full rounded-xl"
           />
@@ -25,7 +37,7 @@ function Other() {
             <h2 className="text-lg font-bold mb-2">Kelas Online</h2>
             <p className="text-sm leading-relaxed">
               Bergabunglah dalam kelas online saya yang dirancang untuk semua
-              level — dari pemula hingga pemain berpengalaman. Materi meliputi
+              level dari pemula hingga pemain berpengalaman. Materi meliputi
               strategi pembukaan, taktik jitu, dan simulasi pertandingan
               interaktif. Akses kelas kapan saja, di mana saja.
             </p>
@@ -85,7 +97,7 @@ function Other() {
         {/* Foto Kanan */}
         <div className="overflow-hidden rounded-xl h-80">
           <img
-            src={profile}
+            src={chessbg3}
             alt="profile"
             className="object-cover w-full h-full rounded-xl"
           />

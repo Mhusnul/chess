@@ -1,26 +1,26 @@
 import React from "react";
-import { CircleArrowOutUpRight } from "lucide-react";
+import { Medal } from "lucide-react";
 
 const achievements = [
   {
-    title: "Juara Nasional Catur 2022",
+    title: "Juara Nasional Catur Pelajar",
     description:
-      "Menjuarai kejuaraan nasional tingkat SMA se-Indonesia dengan rekor tanpa kalah.",
+      "Menjadi juara utama dalam kejuaraan nasional antar pelajar dengan performa tanpa kekalahan.",
   },
   {
-    title: "Content Creator Catur",
+    title: "Finalis Kejuaraan Catur Mahasiswa Nasional (POMNAS)",
     description:
-      "Membangun komunitas pecinta catur di TikTok & YouTube dengan jutaan penonton.",
+      "Mewakili kampus dalam ajang paling bergengsi tingkat nasional dan berhasil masuk babak final.",
   },
   {
-    title: "Buku 'Langkah Strategis'",
+    title: "Peraih Medali Perak PON Remaja",
     description:
-      "Menulis buku catur populer untuk pemula hingga menengah, terjual lebih dari 10.000 eksemplar.",
+      "Membawa pulang medali perak pada cabang catur cepat dalam Pekan Olahraga Nasional Remaja.",
   },
   {
-    title: "Perwakilan ASEAN Games",
+    title: "Wakil Indonesia di ASEAN University Games",
     description:
-      "Mewakili Indonesia di kejuaraan tingkat Asia Tenggara pada usia 18 tahun.",
+      "Dipilih untuk mewakili Indonesia dalam kompetisi catur antar mahasiswa se-Asia Tenggara.",
   },
 ];
 
@@ -32,7 +32,7 @@ function AchievementCard({ title, description, bgColor }) {
         <p className="text-sm">{description}</p>
         <div className="card-actions justify-end">
           <button className="flex items-center gap-2 hover:underline">
-            Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
+            <Medal strokeWidth={1.5} absoluteStrokeWidth />
           </button>
         </div>
       </div>

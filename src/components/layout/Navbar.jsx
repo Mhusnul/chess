@@ -1,77 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
+import GooeyNav from "../common/GooeyNav";
+import { X } from "lucide-react";
 
 function Navbar() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const items = [
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Contact", href: "#" },
+  ];
+
   return (
-    <div className="navbar fixed top-0 z-10 text-white ">
+    <div className="navbar fixed top-0 z-50 text-white bg-black/30 backdrop-blur-md w-full">
       {/* START */}
-      <div className="">
-        {/* Mobile Menu */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+      <div className="flex-1">
+        {/* Mobile Toggle Button */}
+        <button
+          onClick={() => setMobileMenuOpen(true)}
+          className="btn btn-ghost lg:hidden"
+          aria-label="Open mobile menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <li>
-              <a>Beranda</a>
-            </li>
-            <li>
-              <a>Prestasi</a>
-            </li>
-            <li>
-              <a>Buku</a>
-            </li>
-          </ul>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+
         {/* Logo */}
-        <a className="btn btn-ghost  text-white  text-xl">FulanChess</a>
+        <a className="btn btn-ghost text-xl text-white">FulanChess</a>
       </div>
 
-      {/* CENTER */}
-      <div className="hidden lg:flex  text-white  navbar-center ">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Beranda</a>
-          </li>
-          <li>
-            <a>Prestasi</a>
-          </li>
-          <li>
-            <a>Buku</a>
-          </li>
-          <li>
-            <a>Streaming</a>
-          </li>
-          <li>
-            <a>Artikel</a>
-          </li>
-          <li>
-            <a>Kontak</a>
-          </li>
-        </ul>
+      {/* CENTER - Desktop Navigation */}
+      <div className="hidden lg:flex navbar-center">
+        <GooeyNav
+          items={items}
+          particleCount={15}
+          particleDistances={[90, 10]}
+          particleR={100}
+          initialActiveIndex={0}
+          animationTime={600}
+          timeVariance={300}
+          colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+        />
       </div>
 
-      {/* END */}
-      <div className="flex items-center navbar-end ">
-        {/* Cart */}
+      {/* END - Cart */}
+      <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <div className="indicator  text-white ">
+            <div className="indicator text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -103,6 +91,34 @@ function Navbar() {
           </div>
         </div>
       </div>
+
+      {/* MOBILE FULL SCREEN MENU */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-4 lg:hidden transition-all">
+          {/* Close Button */}
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            aria-label="Close mobile menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* GooeyNav in Mobile */}
+          <div className="w-full max-w-sm">
+            <GooeyNav
+              items={items}
+              particleCount={12}
+              particleDistances={[70, 10]}
+              particleR={80}
+              initialActiveIndex={0}
+              animationTime={500}
+              timeVariance={300}
+              colors={[1, 2, 3, 4]}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
