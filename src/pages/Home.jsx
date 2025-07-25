@@ -4,6 +4,7 @@ import Achievement from "../components/section/Achievement";
 import Aboute from "../components/section/Aboute";
 import board from "../assets/chess-bg.jpg";
 import Other from "../components/section/Other";
+import Course from "../components/section/Course";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
         <Achievement />
       </div>
       <Other />
+      <Course />
     </div>
   );
 }
