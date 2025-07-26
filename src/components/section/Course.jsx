@@ -74,7 +74,7 @@ function Course() {
 
         {/* Tombol CTA */}
         <div className="col-span-1 md:col-span-2 flex justify-center mt-6">
-          <button className="w-full bg-black/30 backdrop-blur-3xl font-bold text-2xl uppercase h-12 rounded-2xl">
+          <button className="w-full bg-black/30 backdrop-blur-3xl font-bold text-2xl uppercase h-12 rounded-2xl font-serif">
             Bergabung Sekarang
           </button>
         </div>

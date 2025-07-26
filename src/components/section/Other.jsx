@@ -7,7 +7,7 @@ import TextType from "../common/TextType";
 function Other() {
   return (
     <div className="text-white p-5 min-h-screen">
-      <div className="text-center mb-5 font-bold uppercase text-3xl">
+      <div className="text-center mb-5 font-bold uppercase text-3xl font-serif">
         <TextType
           text={[
             "Mari Kenal Lebih Dekat",
