@@ -5,6 +5,7 @@ import Aboute from "../components/section/Aboute";
 import board from "../assets/chess-bg.jpg";
 import Other from "../components/section/Other";
 import Course from "../components/section/Course";
+import Book from "../components/section/Book";
 
 function Home() {
   return (
@@ -19,6 +20,7 @@ function Home() {
       </div>
       <Other />
       <Course />
+      <Book />
     </div>
   );
 }
