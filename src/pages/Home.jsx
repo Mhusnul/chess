@@ -9,7 +9,7 @@ import Book from "../components/section/Book";
 
 function Home() {
   return (
-    <div className="bg-black min-h-screen ">
+    <div className="bg-black font-serif ">
       <Navbar />
       <Hero />
       <div

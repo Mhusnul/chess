@@ -86,8 +86,8 @@ function Book() {
             <img src={coverbook2} alt="Shoes" />
           </figure>
           <div className="card-body text-center">
-            <h2 className="card-title">Be a Game Changer</h2>
-            <p className="text-red-600">Rp 150.000</p>
+            <h2 className="card-title">Mindset Is Everything</h2>
+            <p className="text-red-600">Rp 170.000</p>
             <button className="mt-2 bg-white text-black px-3 py-2 rounded">
               Beli Sekarang
             </button>
@@ -99,8 +99,8 @@ function Book() {
             <img src={coverbook3} alt="Shoes" />
           </figure>
           <div className="card-body text-center">
-            <h2 className="card-title">Be a Game Changer</h2>
-            <p className="text-red-600">Rp 150.000</p>
+            <h2 className="card-title">Focus On The Best</h2>
+            <p className="text-red-600">Rp 130.000</p>
             <button className="mt-2 bg-white text-black px-3 py-2 rounded">
               Beli Sekarang
             </button>
@@ -112,8 +112,8 @@ function Book() {
             <img src={coverbook4} alt="Shoes" />
           </figure>
           <div className="card-body text-center">
-            <h2 className="card-title">Be a Game Changer</h2>
-            <p className="text-red-600">Rp 150.000</p>
+            <h2 className="card-title">World Chess Day</h2>
+            <p className="text-red-600">Rp 180.000</p>
             <button className="mt-2 bg-white text-black px-3 py-2 rounded">
               Beli Sekarang
             </button>
@@ -125,8 +125,8 @@ function Book() {
             <img src={coverbook5} alt="Shoes" />
           </figure>
           <div className="card-body text-center">
-            <h2 className="card-title">Be a Game Changer</h2>
-            <p className="text-red-600">Rp 150.000</p>
+            <h2 className="card-title">Halls Checkmate</h2>
+            <p className="text-red-600">Rp 190.000</p>
             <button className="mt-2 bg-white text-black px-3 py-2 rounded">
               Beli Sekarang
             </button>
@@ -138,7 +138,7 @@ function Book() {
             <img src={coverbook6} alt="Shoes" />
           </figure>
           <div className="card-body text-center">
-            <h2 className="card-title">Be a Game Changer</h2>
+            <h2 className="card-title">Chess Game</h2>
             <p className="text-red-600">Rp 150.000</p>
             <button className="mt-2 bg-white text-black px-3 py-2 rounded">
               Beli Sekarang
