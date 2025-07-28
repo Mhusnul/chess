@@ -5,6 +5,7 @@ import bookbg from "../../assets/book-bg.jpg";
 import coverbook4 from "../../assets/cover-book4.jpg";
 import coverbook5 from "../../assets/cover-book5.jpg";
 import coverbook6 from "../../assets/cover-book6.jpg";
+
 function Book() {
   return (
     <div className="text-white font-serif">
@@ -15,8 +16,8 @@ function Book() {
           <div className="p-5">
             <h3 className=" font-light text-2xl">Be a Game Changer</h3>
             <p className="font-light text-sm my-3">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum,
-              vitae.
+              Buku inspiratif yang mendorong kamu untuk berani tampil beda dan
+              menciptakan perubahan positif dalam hidup maupun kariermu.
             </p>
             <button className="mt-2 bg-white text-black px-3 py-2 flex gap-2 rounded">
               Beli Sekarang
@@ -24,12 +25,14 @@ function Book() {
           </div>
           <img src={coverbook1} alt="" className="h-full p-3" />
         </div>
+
         <div className="bg-black/30 backdrop-blur-md max-h-[40vh] overflow-hidden rounded-xl flex justify-between items-center">
           <div className="p-5">
-            <h3 className=" font-light text-2xl">Mindset Is Everythingr</h3>
+            <h3 className=" font-light text-2xl">Mindset Is Everything</h3>
             <p className="font-light text-sm my-3">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum,
-              vitae.
+              Temukan kekuatan pola pikir dalam meraih kesuksesan. Buku ini
+              membantumu membentuk cara pandang yang lebih produktif dan penuh
+              harapan.
             </p>
             <button className="mt-2 bg-white text-black px-3 py-2 flex gap-2 rounded">
               Beli Sekarang
@@ -37,12 +40,14 @@ function Book() {
           </div>
           <img src={coverbook2} alt="" className="h-full p-3" />
         </div>
+
         <div className="bg-white/30 backdrop-blur-md max-h-[40vh] overflow-hidden rounded-xl flex justify-between items-center">
           <div className="p-5">
             <h3 className=" font-light text-2xl">Focus On The Best</h3>
             <p className="font-light text-sm my-3">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum,
-              vitae.
+              Pelajari cara memfokuskan energi dan perhatian hanya pada hal-hal
+              terbaik dalam hidupmu, demi hasil yang maksimal dan lebih
+              bermakna.
             </p>
             <button className="mt-2 bg-white text-black px-3 py-2 flex gap-2 rounded">
               Beli Sekarang
