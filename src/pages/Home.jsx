@@ -8,6 +8,7 @@ import Course from "../components/section/Course";
 import Book from "../components/section/Book";
 import Content from "../components/section/Content";
 import Footer from "../components/layout/Footer";
+import Cart from "../components/common/Cart";
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function Home() {
       <Book />
       <Content />
       <Footer />
+      <Cart />
     </div>
   );
 }
