@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCourseData } from '../../hooks/useCourseData';
+import { useCourseData } from '../../hooks/useCourseDataFixed';
 import { Loader, AlertCircle, Clock, Users, Award } from 'lucide-react';
 
 const CourseTest = () => {
@@ -21,7 +21,9 @@ const CourseTest = () => {
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 flex items-center justify-center">
         <div className="text-center">
           <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-white mb-2">Error Loading Data</h3>
+          <h3 className="text-xl font-semibold text-white mb-2">
+            Error Loading Data
+          </h3>
           <p className="text-gray-300 mb-6">{error}</p>
           <button
             onClick={refetch}
@@ -56,7 +58,7 @@ const CourseTest = () => {
         {/* Course Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {courses.map((course) => (
-            <div 
+            <div
               key={course.id}
               className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6 hover:bg-white/15 transition-all duration-300"
             >
@@ -77,9 +79,11 @@ const CourseTest = () => {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-2 text-gray-300">
                   <Clock className="w-4 h-4" />
-                  <span>{course.pertemuan} • {course.jamPelatihan}</span>
+                  <span>
+                    {course.pertemuan} • {course.jamPelatihan}
+                  </span>
                 </div>
-                
+
                 <div className="flex items-center gap-2 text-gray-300">
                   <Users className="w-4 h-4" />
                   <span className="text-xs">{course.keterangan}</span>
@@ -88,7 +92,9 @@ const CourseTest = () => {
                 {course.promo && (
                   <div className="flex items-center gap-2 text-yellow-300">
                     <Award className="w-4 h-4" />
-                    <span className="text-xs">{course.promo.replace(/"/g, '')}</span>
+                    <span className="text-xs">
+                      {course.promo.replace(/"/g, "")}
+                    </span>
                   </div>
                 )}
 
@@ -101,7 +107,9 @@ const CourseTest = () => {
 
               {/* Materi Preview */}
               <div className="mt-4 p-3 bg-gray-800/50 rounded-lg">
-                <p className="text-xs text-gray-300 font-medium mb-1">Materi:</p>
+                <p className="text-xs text-gray-300 font-medium mb-1">
+                  Materi:
+                </p>
                 <p className="text-xs text-gray-400 line-clamp-3">
                   {course.materi}
                 </p>
