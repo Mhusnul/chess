@@ -1,6 +1,6 @@
-import React from 'react';
-import { useCourseData } from '../../hooks/useCourseDataFixed';
-import { Loader, AlertCircle, Clock, Users, Award } from 'lucide-react';
+import React from "react";
+import { useCourseData } from "../../hooks/useCourseDataFixed";
+import { Loader, AlertCircle, Clock, Users, Award } from "lucide-react";
 
 const CourseTest = () => {
   const { courses, loading, error, refetch } = useCourseData();
