@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Atom,
-  CalendarSync,
-  SmilePlus,
-  BrickWallFire,
-} from "lucide-react";
+import { Atom, CalendarSync, SmilePlus, BrickWallFire } from "lucide-react";
 import course from "../../assets/chess-bg.jpg";
 import coursebg from "../../assets/course-bg.jpg";
 
@@ -79,9 +74,9 @@ function Course() {
 
         {/* Tombol CTA */}
         <div className="col-span-1 md:col-span-2 flex justify-center mt-6">
-          <button 
-            onClick={() => window.location.href = '/class'}
-            className="w-full bg-black/30 backdrop-blur-3xl font-bold text-2xl uppercase h-12 rounded-2xl font-serif hover:bg-black/50 transition-all duration-300"
+          <button
+            onClick={() => (window.location.href = "/class")}
+            className="w-full bg-white font-bold text-2xl uppercase h-12 rounded-2xl font-serif text-black hover:bg-black/50 hover:text-red-500 transition-all duration-300"
           >
             Bergabung Sekarang
           </button>
