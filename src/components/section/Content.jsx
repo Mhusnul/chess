@@ -8,7 +8,6 @@ import {
   Camera,
 } from "lucide-react";
 import contentBg from "../../assets/chess-bg2.jpg";
-import videoFrame from "../../assets/videoframe_4250.png";
 
 function Content() {
   const contentData = [
@@ -47,17 +46,16 @@ function Content() {
   ];
 
   return (
-    <div
-      id="content"
-      className="min-h-screen text-white p-6"
-      style={{
-        backgroundImage: `url(${contentBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div id="content" className="min-h-screen  text-white p-3">
       {/* Header Section */}
-      <div className="text-center mb-12">
+      <div
+        className="text-center mb-12 rounded-xl p-3"
+        style={{
+          backgroundImage: `url(${contentBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <h2 className="text-5xl font-bold tracking-wider uppercase bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent drop-shadow-lg mb-4">
           Konten Digital
         </h2>
@@ -72,22 +70,17 @@ function Content() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {/* Featured Video Section */}
         <div className="lg:col-span-2">
-          <div className="bg-black/30 backdrop-blur-md rounded-xl p-6 mb-6">
-            <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
-              <Play className="text-white" size={28} />
-              Video Unggulan
-            </h3>
-            <div className="relative rounded-lg overflow-hidden">
-              <img
-                src={videoFrame}
-                alt="Featured Video"
-                className="w-full h-64 object-cover"
-              />
-              <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                <button className="bg-white hover:bg-gray-200 transition-colors p-4 rounded-full">
-                  <Play fill="black" size={32} />
-                </button>
-              </div>
+          <div className="rounded-xl p-6 mb-6">
+            {/* Embed YouTube */}
+            <div className="relative rounded-lg overflow-hidden aspect-video">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/Y2CZbYtGV6I?si=8ZRufvQViMMvid80"
+                title="YouTube video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
             <div className="mt-4">
               <h4 className="text-lg font-semibold">
@@ -124,11 +117,6 @@ function Content() {
 
         {/* Content Types */}
         <div className="space-y-4">
-          <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-            <Camera className="text-white" size={28} />
-            Jenis Konten
-          </h3>
-
           {contentData.map((item, index) => (
             <div
               key={index}
@@ -153,19 +141,19 @@ function Content() {
               </div>
             </div>
           ))}
-
-          {/* CTA Button */}
-          <div className="mt-8">
-            <button className="w-full bg-gradient-to-r from-gray-800 to-black hover:from-gray-700 hover:to-gray-900 transition-all duration-300 text-white font-semibold py-3 px-6 rounded-xl">
-              Lihat Semua Konten
-            </button>
-          </div>
         </div>
       </div>
 
       {/* Bottom CTA Section */}
       <div className="mt-16 text-center">
-        <div className="bg-black/40 backdrop-blur-md rounded-xl p-8 max-w-4xl mx-auto">
+        <div
+          className="bg-black/40 backdrop-blur-md rounded-xl p-8 max-w-4xl mx-auto"
+          style={{
+            backgroundImage: `url(${contentBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
           <h3 className="text-3xl font-bold mb-4">
             Ikuti Perjalanan Catur Saya
           </h3>
