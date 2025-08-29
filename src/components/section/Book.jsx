@@ -1,9 +1,9 @@
 import React from "react";
 import { ShoppingCart, Plus } from "lucide-react";
 import bookbg from "../../assets/book-bg.jpg";
-import { topBooks } from "../../data/bookData.js";
+import { topBooks } from "../../data/BookData.js";
 import useCartStore from "../../store/cartStore";
-import useToast from "../../hooks/useToast";
+import useToast from "../../hooks/useToast.jsx";
 
 function Book() {
   const { addToCart, getItemQuantity } = useCartStore();
