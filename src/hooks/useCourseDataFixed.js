@@ -12,17 +12,17 @@ const parsePrice = (priceStr) => {
 const parseCSV = (csvText) => {
   console.log("Raw CSV length:", csvText.length);
   console.log("First 500 chars:", csvText.substring(0, 500));
-  
+
   const courses = [];
   let currentRow = [];
   let currentField = "";
   let inQuotes = false;
   let isHeader = true;
-  
+
   for (let i = 0; i < csvText.length; i++) {
     const char = csvText[i];
     const nextChar = csvText[i + 1];
-    
+
     if (char === '"') {
       if (inQuotes && nextChar === '"') {
         // Escaped quote
@@ -32,14 +32,14 @@ const parseCSV = (csvText) => {
         // Toggle quote state
         inQuotes = !inQuotes;
       }
-    } else if (char === ',' && !inQuotes) {
+    } else if (char === "," && !inQuotes) {
       // End of field
       currentRow.push(currentField.trim());
       currentField = "";
-    } else if (char === '\n' && !inQuotes) {
+    } else if (char === "\n" && !inQuotes) {
       // End of row
       currentRow.push(currentField.trim());
-      
+
       if (isHeader) {
         console.log("Header row:", currentRow);
         isHeader = false;
@@ -58,11 +58,13 @@ const parseCSV = (csvText) => {
           promo: currentRow[8] || "",
           syarat: currentRow[9] || "",
         };
-        
+
         courses.push(course);
-        console.log(`Added course ${course.id}: ${course.title} - ${course.priceDisplay}`);
+        console.log(
+          `Added course ${course.id}: ${course.title} - ${course.priceDisplay}`
+        );
       }
-      
+
       // Reset for next row
       currentRow = [];
       currentField = "";
@@ -71,7 +73,7 @@ const parseCSV = (csvText) => {
       currentField += char;
     }
   }
-  
+
   // Handle last row if no trailing newline
   if (currentField || currentRow.length > 0) {
     currentRow.push(currentField.trim());
@@ -89,12 +91,14 @@ const parseCSV = (csvText) => {
         promo: currentRow[8] || "",
         syarat: currentRow[9] || "",
       };
-      
+
       courses.push(course);
-      console.log(`Added final course ${course.id}: ${course.title} - ${course.priceDisplay}`);
+      console.log(
+        `Added final course ${course.id}: ${course.title} - ${course.priceDisplay}`
+      );
     }
   }
-  
+
   return courses;
 };
 
