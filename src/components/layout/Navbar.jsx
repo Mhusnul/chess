@@ -6,10 +6,29 @@ import { X } from "lucide-react";
 function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Get current page for active state
+  const currentPath = window.location.pathname;
+
   const items = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    {
+      label: "Home",
+      href: "/",
+      isExternal: true,
+      isActive: currentPath === "/",
+    },
+    {
+      label: "Kelas",
+      href: "/class",
+      isExternal: true,
+      isActive: currentPath === "/class",
+    },
+    {
+      label: "Profile",
+      href: "/about",
+      isExternal: true,
+      isActive: currentPath === "/about",
+    },
+    { label: "Contact", href: "/#footer", isActive: false },
   ];
 
   return (
@@ -39,7 +58,12 @@ function Navbar() {
         </button>
 
         {/* Logo */}
-        <a className="btn btn-ghost text-xl text-white">FulanChess</a>
+        <a
+          href="/"
+          className="btn btn-ghost text-xl text-white hover:text-red-400 transition-colors"
+        >
+          FulanChess
+        </a>
       </div>
 
       {/* CENTER - Desktop Navigation */}
