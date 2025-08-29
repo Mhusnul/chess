@@ -3,6 +3,10 @@ import profile from "../../assets/chess-player.jpg";
 import { CircleArrowOutUpRight } from "lucide-react";
 
 function Aboute() {
+  const handleNavigateToAbout = () => {
+    window.location.pathname = "/about";
+  };
+
   return (
     <div
       id="about"
@@ -31,7 +35,10 @@ function Aboute() {
           </p>
         </div>
         <div className="card-actions justify-end">
-          <button className="flex items-center gap-2 hover:underline">
+          <button
+            onClick={handleNavigateToAbout}
+            className="flex items-center gap-2 hover:underline transition-all duration-300 hover:text-red-400"
+          >
             Selengkapnya <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
           </button>
         </div>
