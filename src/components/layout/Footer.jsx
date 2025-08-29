@@ -14,6 +14,7 @@ import {
 function Footer() {
   return (
     <footer
+      id="footer"
       style={{ backgroundImage: `url(${coursebg})` }}
       className=" text-white"
     >
