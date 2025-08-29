@@ -85,6 +85,22 @@ const GooeyNav = ({
     textRef.current.innerText = element.innerText;
   };
   const handleClick = (e, index) => {
+    const item = items[index];
+
+    // Handle external navigation (different pages)
+    if (item.isExternal) {
+      e.preventDefault();
+      // Use href directly for both pages and hash navigation
+      if (item.href.startsWith("/#")) {
+        // Navigate to home page first, then scroll to section
+        window.location.href = item.href;
+      } else {
+        // Navigate to different page
+        window.location.pathname = item.href;
+      }
+      return;
+    }
+
     const liEl = e.currentTarget;
     if (activeIndex === index) return;
     setActiveIndex(index);
