@@ -6,6 +6,7 @@ import coursebg from "../../assets/course-bg.jpg";
 function Course() {
   return (
     <div
+      id="course"
       style={{ backgroundImage: `url(${coursebg})`, backgroundSize: "cover" }}
       className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 text-white min-h-screen"
     >

@@ -23,7 +23,7 @@ function Book() {
   };
 
   return (
-    <div className="text-white font-serif">
+    <div id="book" className="text-white font-serif">
       <ToastComponent />
       <h1 className="text-center font-bold my-5 text-3xl">Top 3 Book</h1>
 

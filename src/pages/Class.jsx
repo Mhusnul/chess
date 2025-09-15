@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import Navbar from "../components/layout/Navbar";
+import ModernNav from "../components/common/ModernNav";
 import Footer from "../components/layout/Footer";
 import Cart from "../components/common/Cart";
 import { useCourseData } from "../hooks/useCourseDataFixed";
@@ -62,7 +62,7 @@ function Class() {
 
   return (
     <div className="bg-black font-serif min-h-screen">
-      <Navbar />
+      <ModernNav />
 
       {/* Hero Section */}
       <div

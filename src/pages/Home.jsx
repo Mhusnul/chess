@@ -1,4 +1,4 @@
-import Navbar from "../components/layout/Navbar";
+import ModernNav from "../components/common/ModernNav";
 import Hero from "../components/section/Hero";
 import Achievement from "../components/section/Achievement";
 import Aboute from "../components/section/Aboute";
@@ -13,7 +13,7 @@ import Cart from "../components/common/Cart";
 function Home() {
   return (
     <div className="bg-black font-serif ">
-      <Navbar />
+      <ModernNav />
       <Hero />
       <div
         style={{ backgroundImage: `url(${board})`, backgroundSize: "cover" }}

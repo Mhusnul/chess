@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/layout/Navbar";
+import ModernNav from "../components/common/ModernNav";
 import Footer from "../components/layout/Footer";
 import profile from "../assets/chess-player.jpg";
 import { ArrowLeft, Trophy, BookOpen, Users, Star } from "lucide-react";
@@ -20,7 +20,7 @@ function About() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
-      <Navbar />
+      <ModernNav />
 
       <div className="pt-20 px-4 pb-12">
         <div className="max-w-7xl mx-auto">

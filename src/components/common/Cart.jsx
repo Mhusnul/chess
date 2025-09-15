@@ -147,7 +147,13 @@ const Cart = () => {
 
                 {/* Action Buttons */}
                 <div className="space-y-3">
-                  <button className="w-full bg-white text-black font-semibold py-3 rounded-lg hover:bg-gray-200 transition-colors">
+                  <button
+                    onClick={() => {
+                      closeCart();
+                      window.location.href = "/checkout";
+                    }}
+                    className="w-full bg-white text-black font-semibold py-3 rounded-lg hover:bg-gray-200 transition-colors"
+                  >
                     Checkout Sekarang
                   </button>
                   <button

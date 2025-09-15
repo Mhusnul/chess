@@ -35,16 +35,6 @@ function Hero() {
           className="custom-scroll-text"
         />
       </div>
-      <TextCursor
-        text="♟️"
-        delay={0.01}
-        spacing={80}
-        followMouseDirection={true}
-        randomFloat={true}
-        exitDuration={0.3}
-        removalInterval={20}
-        maxPoints={10}
-      />
     </div>
   );
 }
