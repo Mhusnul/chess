@@ -38,7 +38,14 @@ const Cart = () => {
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div className="flex items-center gap-3">
             <ShoppingBag size={24} />
-            <h2 className="text-xl font-bold">Keranjang Belanja</h2>
+            <div>
+              <h2 className="text-xl font-bold">Keranjang Belanja</h2>
+              {items.length > 0 && (
+                <p className="text-sm text-gray-400">
+                  {getTotalItems()} item dalam keranjang
+                </p>
+              )}
+            </div>
           </div>
           <button
             onClick={closeCart}
@@ -56,11 +63,13 @@ const Cart = () => {
               <ShoppingBag size={64} className="text-gray-600 mb-4" />
               <h3 className="text-lg font-semibold mb-2">Keranjang Kosong</h3>
               <p className="text-gray-400 mb-6">
-                Belum ada buku yang ditambahkan ke keranjang
+                Belum ada buku atau kelas yang ditambahkan ke keranjang.
+                <br />
+                Jelajahi koleksi kami dan temukan yang Anda inginkan!
               </p>
               <button
                 onClick={closeCart}
-                className="bg-white text-black px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
               >
                 Mulai Belanja
               </button>

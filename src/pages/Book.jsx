@@ -4,7 +4,14 @@ import Footer from "../components/layout/Footer";
 import Cart from "../components/common/Cart";
 import useCartStore from "../store/cartStore";
 import useToast from "../hooks/useToast.jsx";
-import { ShoppingCart, Star, Filter, Search, ArrowLeft } from "lucide-react";
+import {
+  ShoppingCart,
+  Star,
+  Filter,
+  Search,
+  ArrowLeft,
+  Plus,
+} from "lucide-react";
 
 // Import cover images
 import cover1 from "../assets/cover-book1.jpg";
@@ -14,6 +21,7 @@ import cover4 from "../assets/cover-book4.jpg";
 import cover5 from "../assets/cover-book5.jpg";
 import cover6 from "../assets/cover-book6.jpg";
 import bookBg from "../assets/book-bg.jpg";
+import courseBg from "../assets/course-bg.jpg";
 
 // Dummy book data
 const booksData = [
@@ -186,34 +194,42 @@ function BookPage() {
 
   return (
     <>
-      <ModernNav />
-      <div
-        className="min-h-screen text-white py-8 pt-24"
-        style={{
-          backgroundImage: `url(${bookBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <ToastComponent />
+      <div className="bg-black font-serif min-h-screen">
+        <ModernNav />
 
-          {/* Header */}
-          <div className="mb-8">
-            <button
-              onClick={goBack}
-              className="mb-4 flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
-            >
-              <ArrowLeft size={20} />
-              <span>Kembali</span>
-            </button>
-
-            <h1 className="text-4xl font-bold mb-2">Koleksi Buku Catur</h1>
-            <p className="text-white/80 text-lg">
-              Temukan buku-buku terbaik untuk meningkatkan kemampuan catur Anda
+        {/* Hero Section */}
+        <div
+          style={{
+            backgroundImage: `url(${bookBg})`,
+            backgroundSize: "cover",
+          }}
+          className="relative min-h-[50vh] flex items-center justify-center"
+        >
+          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="relative z-10 text-center text-white px-4">
+            <h1 className="text-5xl font-bold mb-4 mt-12">
+              Koleksi Buku Catur
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Temukan buku-buku terbaik untuk meningkatkan kemampuan catur Anda.
+              Dari strategi dasar hingga teknik lanjutan, koleksi lengkap untuk
+              semua level.
             </p>
           </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <ToastComponent />
+
+          {/* Back Button */}
+          <button
+            onClick={goBack}
+            className="mb-6 flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
+          >
+            <ArrowLeft size={20} />
+            <span>Kembali</span>
+          </button>
 
           {/* Search and Filter Section */}
           <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/20">
@@ -236,7 +252,7 @@ function BookPage() {
               {/* Filter Toggle */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 px-4 py-3 rounded-lg transition-colors"
+                className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg transition-colors"
               >
                 <Filter size={20} />
                 <span>Filter</span>
@@ -298,13 +314,14 @@ function BookPage() {
 
           {/* Books Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {filteredBooks.map((book) => {
+            {filteredBooks.map((book, index) => {
               const quantity = getItemQuantity(book.id);
+              const cardBg = index % 2 === 0 ? "bg-white/30" : "bg-black/30";
 
               return (
                 <div
                   key={book.id}
-                  className="bg-black/50 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 hover:border-purple-500/50 transition-all duration-300 group"
+                  className={`${cardBg} backdrop-blur-md rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 group`}
                 >
                   {/* Book Cover */}
                   <div className="relative overflow-hidden">
@@ -331,12 +348,12 @@ function BookPage() {
                   {/* Book Info */}
                   <div className="p-6">
                     <div className="mb-2">
-                      <span className="inline-block bg-purple-600/20 text-purple-400 px-2 py-1 rounded text-xs font-medium">
+                      <span className="inline-block bg-yellow-400/20 text-yellow-400 px-2 py-1 rounded text-xs font-medium">
                         {book.category}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">
+                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-yellow-400 transition-colors">
                       {book.title}
                     </h3>
 
@@ -377,7 +394,7 @@ function BookPage() {
                     {/* Price and Add to Cart */}
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-2xl font-bold text-purple-400">
+                        <div className="text-2xl font-bold text-yellow-400">
                           {formatPrice(book.price)}
                         </div>
                         {book.originalPrice > book.price && (
@@ -387,18 +404,50 @@ function BookPage() {
                         )}
                       </div>
 
-                      <button
-                        onClick={() => handleAddToCart(book)}
-                        className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors font-medium"
-                      >
-                        <ShoppingCart size={18} />
-                        <span>{quantity > 0 ? `(${quantity})` : "Beli"}</span>
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleAddToCart(book)}
+                          className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-semibold flex items-center gap-2"
+                        >
+                          <ShoppingCart size={16} />
+                          {quantity > 0 ? `(${quantity})` : "Beli"}
+                        </button>
+                        <button
+                          onClick={() => handleAddToCart(book)}
+                          className="bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                        >
+                          <Plus size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Promo Section */}
+          <div
+            style={{
+              backgroundImage: `url(${bookBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "bottom",
+            }}
+            className="text-white bg-white h-64 my-5 mx-3 text-center flex flex-col justify-center items-center rounded-xl"
+          >
+            <p className="">Lebih Hemat untuk Buku Terbaikmu</p>
+            <h3 className="text-5xl my-3">Diskon 20% untuk Buku Pilihan</h3>
+            <button
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("Semua");
+                setSelectedLevel("Semua");
+                setShowFilters(false);
+              }}
+              className="mt-2 bg-white text-black px-3 py-2 flex gap-2 rounded hover:bg-gray-200 transition-colors"
+            >
+              Lihat Promo
+            </button>
           </div>
 
           {/* No Results */}
@@ -425,10 +474,10 @@ function BookPage() {
             </div>
           )}
         </div>
-      </div>
 
-      <Footer />
-      <Cart />
+        <Footer />
+        <Cart />
+      </div>
     </>
   );
 }

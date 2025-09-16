@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import useCartStore from "../store/cartStore";
 import bookBg from "../assets/book-bg.jpg";
+import courseBg from "../assets/course-bg.jpg";
 import ModernNav from "../components/common/ModernNav";
 import Footer from "../components/layout/Footer";
+import { Plus, Minus, Trash2 } from "lucide-react";
 
 const Checkout = () => {
-  const { items, getTotalPrice, clearCart } = useCartStore();
+  const { items, getTotalPrice, clearCart, updateQuantity, removeFromCart } =
+    useCartStore();
 
   const [currentStep, setCurrentStep] = useState(1); // 1: Form, 2: Payment, 3: Success
   const [customerData, setCustomerData] = useState({
@@ -18,6 +21,15 @@ const Checkout = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [paymentProof, setPaymentProof] = useState(null);
+
+  // Handle quantity changes
+  const handleQuantityChange = (itemId, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeFromCart(itemId);
+    } else {
+      updateQuantity(itemId, newQuantity);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -215,16 +227,31 @@ const Checkout = () => {
 
   return (
     <>
-      <ModernNav />
-      <div
-        className="min-h-screen text-white py-8 pt-24"
-        style={{
-          backgroundImage: `url(${bookBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="bg-black font-serif min-h-screen">
+        <ModernNav />
+
+        {/* Hero Section */}
+        <div
+          style={{
+            backgroundImage: `url(${courseBg})`,
+            backgroundSize: "cover",
+          }}
+          className="relative min-h-[50vh] flex items-center justify-center"
+        >
+          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="relative z-10 text-center text-white px-4">
+            <h1 className="text-5xl font-bold mb-4 mt-12">
+              Checkout Pembelian
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Selesaikan pembelian Anda dengan mudah dan aman. Ikuti
+              langkah-langkah di bawah ini.
+            </p>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto px-4 py-12">
           {/* Header dengan Progress */}
           <div className="mb-8">
             <button
@@ -512,9 +539,42 @@ const Checkout = () => {
                     />
                     <div className="flex-1">
                       <h3 className="font-medium text-white">{item.title}</h3>
-                      <p className="text-sm text-white/70">
-                        Qty: {item.quantity}
+                      <p className="text-sm text-white/70 mb-2">
+                        {item.author && `oleh ${item.author}`}
                       </p>
+
+                      {/* Quantity Controls */}
+                      <div className="flex items-center space-x-3 mb-2">
+                        <span className="text-sm text-white/70">Jumlah:</span>
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item.id, item.quantity - 1)
+                            }
+                            className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors"
+                          >
+                            <Minus size={16} />
+                          </button>
+                          <span className="text-white font-medium w-8 text-center">
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(item.id, item.quantity + 1)
+                            }
+                            className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors"
+                          >
+                            <Plus size={16} />
+                          </button>
+                        </div>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="w-8 h-8 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors ml-2"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+
                       <p className="text-sm font-medium text-yellow-400">
                         {formatPrice(item.price * item.quantity)}
                       </p>
@@ -575,8 +635,9 @@ const Checkout = () => {
             </div>
           </div>
         </div>
+
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

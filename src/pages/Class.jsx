@@ -20,7 +20,7 @@ import coursebg from "../assets/course-bg.jpg";
 function Class() {
   const { courses, loading, error, refetch } = useCourseData();
   const { addToCart } = useCartStore();
-  const { showToast } = useToast();
+  const { showToast, ToastComponent } = useToast();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Filter courses by category
@@ -109,8 +109,10 @@ function Class() {
 
       {/* Course Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
+        <ToastComponent />
+
         {/* Category Filter */}
-        <div className="mb-12">
+        <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/20">
           <div className="flex items-center gap-3 mb-6">
             <Filter className="w-5 h-5 text-white" />
             <h3 className="text-xl font-semibold text-white">
@@ -124,7 +126,7 @@ function Class() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   selectedCategory === category
-                    ? "bg-red-600 text-white border-red-500"
+                    ? "bg-red-600 text-white border-red-700"
                     : "bg-white/10 text-gray-300 border-white/20 hover:bg-white/20 hover:text-white"
                 } border backdrop-blur-md`}
               >
@@ -165,7 +167,7 @@ function Class() {
             </h2>
             <button
               onClick={refetch}
-              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors"
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
               Refresh Data
             </button>
@@ -196,74 +198,83 @@ function Class() {
 
           {!loading && !error && filteredCourses.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredCourses.map((courseItem) => (
-                <div
-                  key={courseItem.id}
-                  className="bg-white/30 backdrop-blur-md rounded-xl border border-white/20 p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105"
-                >
-                  {/* Course Header */}
-                  <div className="mb-4">
-                    <h4 className="text-lg font-bold text-white mb-2 capitalize">
-                      {courseItem.title}
-                    </h4>
-                    <div className="text-2xl font-bold text-red-500 mb-2">
-                      {courseItem.priceDisplay}
-                    </div>
-                    <span className="px-3 py-1 bg-white/10 text-white border border-white/20 rounded-full text-sm font-medium capitalize">
-                      {courseItem.category}
-                    </span>
-                  </div>
+              {filteredCourses.map((courseItem, index) => {
+                // Menggunakan sistem warna seperti di Book
+                const cardBg = index % 2 === 0 ? "bg-white/30" : "bg-black/30";
 
-                  {/* Course Details */}
-                  <div className="space-y-3 text-sm mb-4">
-                    <div className="flex items-center gap-2 text-gray-300">
-                      <Clock className="w-4 h-4" />
-                      <span>
-                        {courseItem.pertemuan} • {courseItem.jamPelatihan}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-gray-300">
-                      <Users className="w-4 h-4" />
-                      <span className="text-xs">{courseItem.keterangan}</span>
-                    </div>
-
-                    {courseItem.promo && (
-                      <div className="flex items-center gap-2 text-red-400">
-                        <Award className="w-4 h-4" />
-                        <span className="text-xs">
-                          {courseItem.promo.replace(/"/g, "")}
+                return (
+                  <div
+                    key={courseItem.id}
+                    className={`${cardBg} backdrop-blur-md rounded-xl border border-white/20 p-6 hover:bg-white/15 transition-all duration-300 hover:scale-105 group overflow-hidden`}
+                  >
+                    {/* Course Header */}
+                    <div className="mb-4">
+                      <div className="mb-2">
+                        <span className="inline-block bg-red-600 text-white px-2 py-1 rounded text-xs font-medium capitalize">
+                          {courseItem.category}
                         </span>
                       </div>
-                    )}
 
-                    {courseItem.syarat && (
-                      <div className="text-xs text-gray-400">
-                        <strong>Syarat:</strong> {courseItem.syarat}
+                      <h4 className="text-xl font-bold text-white mb-2 capitalize group-hover:text-yellow-400 transition-colors">
+                        {courseItem.title}
+                      </h4>
+
+                      <div className="text-2xl font-bold text-yellow-400 mb-2">
+                        {courseItem.priceDisplay}
                       </div>
-                    )}
-                  </div>
+                    </div>
 
-                  {/* Materi Preview */}
-                  <div className="mb-4 p-3 bg-black/30 rounded-lg">
-                    <p className="text-xs text-white font-medium mb-1">
-                      Materi:
-                    </p>
-                    <p className="text-xs text-gray-400 line-clamp-4">
-                      {courseItem.materi}
-                    </p>
-                  </div>
+                    {/* Course Details */}
+                    <div className="space-y-3 text-sm mb-4">
+                      <div className="flex items-center gap-2 text-white/80">
+                        <Clock className="w-4 h-4" />
+                        <span>
+                          {courseItem.pertemuan} • {courseItem.jamPelatihan}
+                        </span>
+                      </div>
 
-                  {/* Action Button */}
-                  <button
-                    onClick={() => handleAddToCart(courseItem)}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
-                  >
-                    <ShoppingCart className="w-4 h-4" />
-                    Daftar Kelas
-                  </button>
-                </div>
-              ))}
+                      <div className="flex items-center gap-2 text-white/70">
+                        <Users className="w-4 h-4" />
+                        <span className="text-xs">{courseItem.keterangan}</span>
+                      </div>
+
+                      {courseItem.promo && (
+                        <div className="flex items-center gap-2 text-yellow-400">
+                          <Award className="w-4 h-4" />
+                          <span className="text-xs">
+                            {courseItem.promo.replace(/"/g, "")}
+                          </span>
+                        </div>
+                      )}
+
+                      {courseItem.syarat && (
+                        <div className="text-xs text-white/60">
+                          <strong>Syarat:</strong> {courseItem.syarat}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Materi Preview */}
+                    <div className="mb-4 p-3 bg-black/30 rounded-lg">
+                      <p className="text-xs text-white font-medium mb-1">
+                        Materi:
+                      </p>
+                      <p className="text-xs text-white/70 line-clamp-4">
+                        {courseItem.materi}
+                      </p>
+                    </div>
+
+                    {/* Action Button */}
+                    <button
+                      onClick={() => handleAddToCart(courseItem)}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors font-semibold"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      Daftar Kelas
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           )}
 
@@ -281,7 +292,7 @@ function Class() {
                 </p>
                 <button
                   onClick={() => setSelectedCategory("All")}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
                 >
                   Lihat Semua Kelas
                 </button>

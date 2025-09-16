@@ -4,6 +4,7 @@ import Class from "./pages/Class";
 import About from "./pages/About";
 import Book from "./pages/Book";
 import Checkout from "./pages/Checkout";
+import Contact from "./pages/Contact";
 
 function App() {
   // Simple routing based on URL path
@@ -23,6 +24,10 @@ function App() {
 
   if (currentPath === "/checkout") {
     return <Checkout />;
+  }
+
+  if (currentPath === "/contact" || currentPath === "/kontak") {
+    return <Contact />;
   }
 
   return <Home />;

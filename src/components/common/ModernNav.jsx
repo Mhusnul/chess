@@ -47,7 +47,7 @@ const ModernNav = () => {
     },
     {
       label: "Contact",
-      href: "/#footer",
+      href: "/contact",
       icon: MessageSquare,
     },
   ];
@@ -88,7 +88,7 @@ const ModernNav = () => {
             <div className="flex-shrink-0">
               <a
                 href="/"
-                className="text-2xl font-bold text-white hover:text-purple-400 transition-colors duration-300"
+                className="text-2xl font-bold text-white hover:text-red-400 transition-colors duration-300"
               >
                 FulanChess
               </a>
@@ -103,14 +103,14 @@ const ModernNav = () => {
                     <button
                       key={index}
                       onClick={() => handleNavClick(item.href)}
-                      className="group relative px-3 py-2 text-white hover:text-purple-400 transition-all duration-300 flex items-center space-x-2"
+                      className="group relative px-3 py-2 text-white hover:text-red-400 transition-all duration-300 flex items-center space-x-2"
                     >
                       <Icon
                         size={18}
                         className="transition-transform group-hover:scale-110"
                       />
                       <span className="font-medium">{item.label}</span>
-                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full transition-all duration-300"></div>
+                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-red-400 to-red-600 group-hover:w-full transition-all duration-300"></div>
                     </button>
                   );
                 })}
@@ -129,7 +129,7 @@ const ModernNav = () => {
                   className="transition-transform group-hover:scale-110"
                 />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold animate-pulse">
+                  <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-red-700 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold animate-pulse">
                     {totalItems}
                   </span>
                 )}
@@ -139,7 +139,7 @@ const ModernNav = () => {
               <div className="md:hidden">
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-white hover:text-purple-400 transition-colors duration-300 p-2"
+                  className="text-white hover:text-red-400 transition-colors duration-300 p-2"
                 >
                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -163,7 +163,7 @@ const ModernNav = () => {
                 <button
                   key={index}
                   onClick={() => handleNavClick(item.href)}
-                  className="group w-full text-left px-3 py-3 text-white hover:text-purple-400 hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 rounded-lg"
+                  className="group w-full text-left px-3 py-3 text-white hover:text-red-400 hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 rounded-lg"
                 >
                   <Icon
                     size={20}
