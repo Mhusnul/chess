@@ -103,14 +103,14 @@ const ModernNav = () => {
                     <button
                       key={index}
                       onClick={() => handleNavClick(item.href)}
-                      className="group relative px-3 py-2 text-white hover:text-red-400 transition-all duration-300 flex items-center space-x-2"
+                      className="group relative px-3 py-2 text-white hover:text-red-700 transition-all duration-300 flex items-center space-x-2"
                     >
                       <Icon
                         size={18}
                         className="transition-transform group-hover:scale-110"
                       />
                       <span className="font-medium">{item.label}</span>
-                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-red-400 to-red-600 group-hover:w-full transition-all duration-300"></div>
+                      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-red-500 to-red-700 group-hover:w-full transition-all duration-300"></div>
                     </button>
                   );
                 })}
@@ -122,7 +122,7 @@ const ModernNav = () => {
               {/* Cart Button */}
               <button
                 onClick={() => (window.location.href = "/checkout")}
-                className="relative p-2 text-white hover:text-purple-400 transition-colors duration-300 group"
+                className="relative p-2 text-white hover:text-red-700 transition-colors duration-300 group"
               >
                 <ShoppingCart
                   size={24}
