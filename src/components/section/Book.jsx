@@ -59,7 +59,7 @@ function Book() {
                   </button>
                   <button
                     onClick={() => handleAddToCart(book)}
-                    className="bg-gray-800 text-white px-3 py-2 rounded hover:bg-gray-700 transition-colors"
+                    className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition-colors"
                   >
                     <Plus size={16} />
                   </button>
@@ -86,7 +86,10 @@ function Book() {
       >
         <p>Lebih Hemat untuk Buku Terbaikmu</p>
         <h3 className="text-5xl my-3">Diskon 20% untuk Buku Pilihan</h3>
-        <button className="mt-2 bg-white text-black px-3 py-2 flex gap-2 rounded">
+        <button
+          onClick={() => (window.location.href = "/book")}
+          className="mt-2 bg-red-600 text-white px-6 py-3 flex gap-2 rounded-lg hover:bg-red-700 transition-colors font-semibold"
+        >
           Lihat Promo
         </button>
       </div>

@@ -77,7 +77,7 @@ function Course() {
         <div className="col-span-1 md:col-span-2 flex justify-center mt-6">
           <button
             onClick={() => (window.location.href = "/class")}
-            className="w-full bg-white font-bold text-2xl uppercase h-12 rounded-2xl font-serif text-black hover:bg-black/50 hover:text-red-500 transition-all duration-300"
+            className="w-full bg-white font-bold text-2xl uppercase h-12 rounded-2xl font-serif text-black hover:bg-red-600 hover:text-white transition-all duration-300"
           >
             Bergabung Sekarang
           </button>

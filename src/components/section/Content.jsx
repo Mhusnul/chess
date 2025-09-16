@@ -163,11 +163,11 @@ function Content() {
             catur yang terus berkembang.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gray-800 hover:bg-gray-700 transition-colors px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2">
+            <button className="bg-red-600 hover:bg-red-700 transition-colors px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2">
               <Youtube className="text-white" size={20} />
               Subscribe YouTube
             </button>
-            <button className="bg-gradient-to-r from-gray-800 to-black hover:from-gray-700 hover:to-gray-900 transition-colors px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2">
+            <button className="bg-red-700 hover:bg-red-800 transition-colors px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2">
               <Instagram className="text-white" size={20} />
               Follow Instagram
             </button>
