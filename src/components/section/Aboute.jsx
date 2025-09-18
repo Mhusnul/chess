@@ -37,7 +37,7 @@ function Aboute() {
         <div className="card-actions justify-end">
           <button
             onClick={handleNavigateToAbout}
-            className="flex items-center gap-2 hover:underline transition-all duration-300 hover:text-red-400"
+            className="flex items-center gap-2 hover:underline transition-all duration-300 text-red-500 hover:text-red-700"
           >
             Selengkapnya <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
           </button>
