@@ -42,7 +42,7 @@ function Other() {
               interaktif. Akses kelas kapan saja, di mana saja.
             </p>
             <div className="card-actions justify-end">
-              <button className="flex items-center gap-2 hover:underline text-red-400 hover:text-red-300 transition-colors">
+              <button className="flex items-center gap-2 hover:underline text-red-500 hover:text-red-700 transition-colors">
                 Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
               </button>
             </div>
@@ -57,7 +57,7 @@ function Other() {
               Buku ini tersedia dalam bentuk fisik maupun digital.
             </p>
             <div className="card-actions justify-end">
-              <button className="flex items-center gap-2 hover:underline text-red-400 hover:text-red-300 transition-colors">
+              <button className="flex items-center gap-2 hover:underline text-red-500 hover:text-red-700 transition-colors">
                 Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
               </button>
             </div>
@@ -74,7 +74,7 @@ function Other() {
               pada pembelajaran yang menyenangkan dan menghibur.
             </p>
             <div className="card-actions justify-end">
-              <button className="flex items-center gap-2 hover:underline text-red-400 hover:text-red-300 transition-colors">
+              <button className="flex items-center gap-2 hover:underline text-red-500 hover:text-red-700 transition-colors">
                 Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
               </button>
             </div>
@@ -87,7 +87,7 @@ function Other() {
               sebagai gaya hidup positif bagi generasi muda.
             </p>
             <div className="card-actions justify-end">
-              <button className="flex items-center gap-2 hover:underline text-red-400 hover:text-red-300 transition-colors">
+              <button className="flex items-center gap-2 hover:underline text-red-500 hover:text-red-700 transition-colors">
                 Learn More <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
               </button>
             </div>

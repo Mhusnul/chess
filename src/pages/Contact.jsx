@@ -13,7 +13,7 @@ import {
   ArrowLeft,
   CheckCircle,
 } from "lucide-react";
-import courseBg from "../assets/course-bg.jpg";
+import courseBg from "../assets/chess-bg2.jpg";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -381,18 +381,21 @@ function Contact() {
           </div>
 
           {/* Map Section */}
-          <div className="bg-black/50 backdrop-blur-md rounded-xl p-8 border border-white/20">
+          <div className="bg-black/50 backdrop-blur-md rounded-xl p-8">
             <h2 className="text-3xl font-bold text-white mb-6 text-center">
               Lokasi Kami
             </h2>
-            <div className="bg-gray-800 rounded-lg h-64 flex items-center justify-center">
-              <div className="text-center text-gray-400">
-                <MapPin className="w-12 h-12 mx-auto mb-4" />
-                <p>Map akan ditampilkan di sini</p>
-                <p className="text-sm mt-2">
-                  Jl. Catur Raya No. 123, Jakarta Selatan
-                </p>
-              </div>
+            <div className="bg-gray-800 rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015127.3947614729!2d106.15840715280285!3d-6.349826533092082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ec45b619cb31%3A0x1c835056ba51ca21!2sJabodetabek!5e0!3m2!1sid!2sid!4v1758004680898!5m2!1sid!2sid"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Lokasi Kami - Jabodetabek"
+              />
             </div>
           </div>
         </div>
