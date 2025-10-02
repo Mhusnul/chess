@@ -4,145 +4,31 @@ import Footer from "../components/layout/Footer";
 import Cart from "../components/common/Cart";
 import useCartStore from "../store/cartStore";
 import useToast from "../hooks/useToast.jsx";
+import useGoogleSheetsBooks from "../hooks/useGoogleSheetsBooks.js";
 import {
   ShoppingCart,
-  Star,
-  Filter,
   Search,
   ArrowLeft,
   Plus,
+  BookOpen,
+  Loader,
 } from "lucide-react";
 
-// Import cover images
-import cover1 from "../assets/cover-book1.jpg";
-import cover2 from "../assets/cover-book2.jpg";
-import cover3 from "../assets/cover-book3.jpg";
-import cover4 from "../assets/cover-book4.jpg";
-import cover5 from "../assets/cover-book5.jpg";
-import cover6 from "../assets/cover-book6.jpg";
 import bookBg from "../assets/book-bg.jpg";
 import courseBg from "../assets/course-bg.jpg";
 
-// Dummy book data
-const booksData = [
-  {
-    id: 1,
-    title: "Strategi Pembukaan Catur",
-    author: "Grandmaster Ahmad",
-    price: 150000,
-    originalPrice: 200000,
-    cover: cover1,
-    rating: 4.8,
-    reviews: 124,
-    category: "Strategi",
-    description:
-      "Pelajari berbagai strategi pembukaan yang digunakan oleh para grandmaster dunia.",
-    pages: 320,
-    language: "Indonesia",
-    level: "Intermediate",
-  },
-  {
-    id: 2,
-    title: "Taktik & Kombinasi Catur",
-    author: "Master Budi Santoso",
-    price: 120000,
-    originalPrice: 160000,
-    cover: cover2,
-    rating: 4.7,
-    reviews: 89,
-    category: "Taktik",
-    description:
-      "Asah kemampuan taktik Anda dengan berbagai kombinasi yang menakjubkan.",
-    pages: 280,
-    language: "Indonesia",
-    level: "Beginner",
-  },
-  {
-    id: 3,
-    title: "Endgame Mastery",
-    author: "International Master Sari",
-    price: 180000,
-    originalPrice: 240000,
-    cover: cover3,
-    rating: 4.9,
-    reviews: 156,
-    category: "Endgame",
-    description:
-      "Kuasai teknik endgame untuk memenangkan permainan di fase akhir.",
-    pages: 350,
-    language: "Indonesia",
-    level: "Advanced",
-  },
-  {
-    id: 4,
-    title: "Psikologi Catur",
-    author: "Dr. Maya Chess",
-    price: 140000,
-    originalPrice: 180000,
-    cover: cover4,
-    rating: 4.6,
-    reviews: 73,
-    category: "Psikologi",
-    description:
-      "Memahami aspek psikologi dalam permainan catur dan cara menggunakannya.",
-    pages: 260,
-    language: "Indonesia",
-    level: "Intermediate",
-  },
-  {
-    id: 5,
-    title: "Sejarah Catur Dunia",
-    author: "Prof. Andi Historian",
-    price: 100000,
-    originalPrice: 130000,
-    cover: cover5,
-    rating: 4.5,
-    reviews: 45,
-    category: "Sejarah",
-    description: "Perjalanan sejarah catur dari awal hingga era modern.",
-    pages: 220,
-    language: "Indonesia",
-    level: "Beginner",
-  },
-  {
-    id: 6,
-    title: "Analisis Partai Legendaris",
-    author: "Grandmaster Dedi",
-    price: 200000,
-    originalPrice: 250000,
-    cover: cover6,
-    rating: 4.9,
-    reviews: 201,
-    category: "Analisis",
-    description:
-      "Analisis mendalam dari partai-partai legendaris dalam sejarah catur.",
-    pages: 400,
-    language: "Indonesia",
-    level: "Advanced",
-  },
-];
-
-const categories = [
-  "Semua",
-  "Strategi",
-  "Taktik",
-  "Endgame",
-  "Psikologi",
-  "Sejarah",
-  "Analisis",
-];
-const levels = ["Semua", "Beginner", "Intermediate", "Advanced"];
-
 function BookPage() {
-  const [books] = useState(booksData);
-  const [filteredBooks, setFilteredBooks] = useState(booksData);
-  const [selectedCategory, setSelectedCategory] = useState("Semua");
-  const [selectedLevel, setSelectedLevel] = useState("Semua");
+  const { books: sheetsBooks, loading, error } = useGoogleSheetsBooks();
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
 
   const { addToCart, getItemQuantity } = useCartStore();
   const { showToast, ToastComponent } = useToast();
+
+  // Update filtered books when sheets data changes
+  React.useEffect(() => {
+    setFilteredBooks(sheetsBooks);
+  }, [sheetsBooks]);
 
   // Format price to Indonesian Rupiah
   const formatPrice = (price) => {
@@ -155,37 +41,40 @@ function BookPage() {
 
   // Handle add to cart
   const handleAddToCart = (book) => {
-    addToCart(book);
+    // Convert book data to cart format
+    const cartBook = {
+      id: book.id,
+      title: book.title,
+      price: parseFloat(book.price) || 0,
+      img: book.cover || "/placeholder-book.jpg",
+      desc: book.description,
+      author: book.author,
+    };
+
+    addToCart(cartBook);
     showToast(`"${book.title}" ditambahkan ke keranjang!`, "success");
   };
 
-  // Filter books based on category, level, and search term
+  // Filter books based on search term only
   const filterBooks = () => {
-    let filtered = books;
-
-    if (selectedCategory !== "Semua") {
-      filtered = filtered.filter((book) => book.category === selectedCategory);
-    }
-
-    if (selectedLevel !== "Semua") {
-      filtered = filtered.filter((book) => book.level === selectedLevel);
-    }
+    let filtered = sheetsBooks;
 
     if (searchTerm) {
       filtered = filtered.filter(
         (book) =>
           book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          book.author.toLowerCase().includes(searchTerm.toLowerCase())
+          book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.category.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     setFilteredBooks(filtered);
   };
 
-  // Apply filters when any filter changes
+  // Apply search filter when search term changes
   React.useEffect(() => {
     filterBooks();
-  }, [selectedCategory, selectedLevel, searchTerm]);
+  }, [searchTerm, sheetsBooks]);
 
   // Go back to previous page
   const goBack = () => {
@@ -231,200 +120,180 @@ function BookPage() {
             <span>Kembali</span>
           </button>
 
-          {/* Search and Filter Section */}
+          {/* Search Section */}
           <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/20">
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            <div className="flex justify-center">
               {/* Search Bar */}
-              <div className="relative flex-1 max-w-md">
+              <div className="relative w-full max-w-lg">
                 <Search
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"
                   size={20}
                 />
                 <input
                   type="text"
-                  placeholder="Cari buku atau penulis..."
+                  placeholder="Cari berdasarkan judul, penulis, atau kategori..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:border-purple-500 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:border-red-500 transition-colors"
                 />
               </div>
-
-              {/* Filter Toggle */}
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg transition-colors"
-              >
-                <Filter size={20} />
-                <span>Filter</span>
-              </button>
             </div>
-
-            {/* Filter Options */}
-            {showFilters && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-white/20">
-                {/* Category Filter */}
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Kategori
-                  </label>
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-500"
-                  >
-                    {categories.map((category) => (
-                      <option
-                        key={category}
-                        value={category}
-                        className="bg-black"
-                      >
-                        {category}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Level Filter */}
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Level
-                  </label>
-                  <select
-                    value={selectedLevel}
-                    onChange={(e) => setSelectedLevel(e.target.value)}
-                    className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-500"
-                  >
-                    {levels.map((level) => (
-                      <option key={level} value={level} className="bg-black">
-                        {level}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Results Info */}
           <div className="mb-6">
             <p className="text-white/80">
-              Menampilkan {filteredBooks.length} dari {books.length} buku
+              Menampilkan {filteredBooks.length} dari {sheetsBooks.length} buku
             </p>
           </div>
 
+          {/* Loading State */}
+          {loading && (
+            <div className="flex justify-center items-center py-12">
+              <div className="text-center">
+                <Loader className="animate-spin w-8 h-8 mx-auto mb-4 text-red-600" />
+                <p className="text-gray-400">Memuat data buku...</p>
+              </div>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="flex justify-center items-center py-12">
+              <div className="text-center">
+                <BookOpen className="w-8 h-8 mx-auto mb-4 text-red-600" />
+                <p className="text-gray-400">Gagal memuat data buku</p>
+                <p className="text-gray-600 text-sm mt-2">{error}</p>
+              </div>
+            </div>
+          )}
+
           {/* Books Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {filteredBooks.map((book, index) => {
-              const quantity = getItemQuantity(book.id);
-              const cardBg = index % 2 === 0 ? "bg-white/30" : "bg-black/30";
+          {!loading && !error && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {filteredBooks.map((book, index) => {
+                const quantity = getItemQuantity(book.id);
+                const cardBg = index % 2 === 0 ? "bg-white/30" : "bg-black/30";
 
-              return (
-                <div
-                  key={book.id}
-                  className={`${cardBg} backdrop-blur-md rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 group`}
-                >
-                  {/* Book Cover */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={book.cover}
-                      alt={book.title}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {book.originalPrice > book.price && (
-                      <div className="absolute top-4 left-4 bg-red-600 text-white px-2 py-1 rounded-lg text-sm font-bold">
-                        {Math.round(
-                          ((book.originalPrice - book.price) /
-                            book.originalPrice) *
-                            100
+                return (
+                  <div
+                    key={book.id}
+                    className={`${cardBg} backdrop-blur-md rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 group`}
+                  >
+                    {/* Book Cover */}
+                    <div className="relative overflow-hidden bg-gray-700">
+                      {book.cover ? (
+                        <img
+                          src={book.cover}
+                          alt={book.title}
+                          className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                            e.target.nextSibling.style.display = "flex";
+                          }}
+                        />
+                      ) : null}
+                      <div
+                        className="w-full h-64 flex flex-col items-center justify-center text-gray-400"
+                        style={{ display: book.cover ? "none" : "flex" }}
+                      >
+                        <BookOpen size={48} />
+                        <span className="text-sm mt-2">Cover Coming Soon</span>
+                      </div>
+                    </div>
+
+                    {/* Book Info */}
+                    <div className="p-6">
+                      <div className="mb-2">
+                        <span className="inline-block bg-yellow-400/20 text-yellow-400 px-2 py-1 rounded text-xs font-medium">
+                          {book.category}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-bold mb-2 text-white group-hover:text-yellow-400 transition-colors">
+                        {book.title}
+                      </h3>
+
+                      <p className="text-white/80 text-sm mb-3">
+                        oleh {book.author}
+                      </p>
+
+                      {/* Additional Info Tags */}
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {book.language && (
+                          <span className="inline-block bg-blue-600/20 text-blue-400 px-2 py-1 rounded text-xs font-medium">
+                            🌐 {book.language}
+                          </span>
                         )}
-                        % OFF
+                        {book.format && (
+                          <span className="inline-block bg-green-600/20 text-green-400 px-2 py-1 rounded text-xs font-medium">
+                            📄 {book.format}
+                          </span>
+                        )}
+                        {book.publisher && (
+                          <span className="inline-block bg-purple-600/20 text-purple-400 px-2 py-1 rounded text-xs font-medium">
+                            🏢 {book.publisher}
+                          </span>
+                        )}
+                        {book.fileSize && (
+                          <span className="inline-block bg-orange-600/20 text-orange-400 px-2 py-1 rounded text-xs font-medium">
+                            💾 {book.fileSize}
+                          </span>
+                        )}
                       </div>
-                    )}
-                    <div className="absolute top-4 right-4 bg-black/70 text-white px-2 py-1 rounded-lg text-sm">
-                      {book.level}
-                    </div>
-                  </div>
 
-                  {/* Book Info */}
-                  <div className="p-6">
-                    <div className="mb-2">
-                      <span className="inline-block bg-yellow-400/20 text-yellow-400 px-2 py-1 rounded text-xs font-medium">
-                        {book.category}
-                      </span>
-                    </div>
+                      <p className="text-white/70 text-sm mb-4 line-clamp-2">
+                        {book.description}
+                      </p>
 
-                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-yellow-400 transition-colors">
-                      {book.title}
-                    </h3>
-
-                    <p className="text-white/80 text-sm mb-3">
-                      oleh {book.author}
-                    </p>
-
-                    <p className="text-white/70 text-sm mb-4 line-clamp-2">
-                      {book.description}
-                    </p>
-
-                    {/* Rating and Reviews */}
-                    <div className="flex items-center space-x-2 mb-4">
-                      <div className="flex items-center space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={16}
-                            className={`${
-                              i < Math.floor(book.rating)
-                                ? "text-yellow-400 fill-current"
-                                : "text-gray-400"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <span className="text-sm text-white/80">
-                        {book.rating} ({book.reviews} ulasan)
-                      </span>
-                    </div>
-
-                    {/* Book Details */}
-                    <div className="text-xs text-white/60 mb-4 space-y-1">
-                      <div>📖 {book.pages} halaman</div>
-                      <div>🌐 {book.language}</div>
-                    </div>
-
-                    {/* Price and Add to Cart */}
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-2xl font-bold text-yellow-400">
-                          {formatPrice(book.price)}
+                      {/* Price and Add to Cart */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          {parseFloat(book.price) > 0 ? (
+                            <div className="text-2xl font-bold text-yellow-400">
+                              {formatPrice(parseFloat(book.price))}
+                            </div>
+                          ) : (
+                            <div className="text-xl font-bold text-gray-400">
+                              Harga Coming Soon
+                            </div>
+                          )}
                         </div>
-                        {book.originalPrice > book.price && (
-                          <div className="text-sm text-white/60 line-through">
-                            {formatPrice(book.originalPrice)}
-                          </div>
-                        )}
-                      </div>
 
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => handleAddToCart(book)}
-                          className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-semibold flex items-center gap-2"
-                        >
-                          <ShoppingCart size={16} />
-                          {quantity > 0 ? `(${quantity})` : "Beli"}
-                        </button>
-                        <button
-                          onClick={() => handleAddToCart(book)}
-                          className="bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-                        >
-                          <Plus size={16} />
-                        </button>
+                        <div className="flex gap-2">
+                          {parseFloat(book.price) > 0 ? (
+                            <>
+                              <button
+                                onClick={() => handleAddToCart(book)}
+                                className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-semibold flex items-center gap-2"
+                              >
+                                <ShoppingCart size={16} />
+                                {quantity > 0 ? `(${quantity})` : "Beli"}
+                              </button>
+                              <button
+                                onClick={() => handleAddToCart(book)}
+                                className="bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                              >
+                                <Plus size={16} />
+                              </button>
+                            </>
+                          ) : (
+                            <button
+                              disabled
+                              className="bg-gray-600 text-gray-300 px-4 py-2 rounded-lg cursor-not-allowed font-semibold flex items-center gap-2"
+                            >
+                              <ShoppingCart size={16} />
+                              Coming Soon
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* Promo Section */}
           <div
