@@ -1,6 +1,5 @@
-import React from "react";
 import profile from "../../assets/chess-player.jpg";
-import { CircleArrowOutUpRight } from "lucide-react";
+import coursebg from "../../assets/chess-bg3.jpg";
 
 function Aboute() {
   const handleNavigateToAbout = () => {
@@ -8,47 +7,43 @@ function Aboute() {
   };
 
   return (
-    <div
-      id="about"
-      className="grid grid-cols-1 md:grid-cols-2 gap-2 text-white p-4"
-    >
-      <div className="bg-[#393E46]/30 backdrop-blur-sm shadow-md p-4 rounded-xl">
-        <h2 className="text-5xl font-bold tracking-wider uppercase bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent drop-shadow-lg">
-          ABOUTE
-        </h2>
-        <h3 className="text-3xl mt-5 font-medium tracking-wide text-gray-100 drop-shadow-md">
-          Muhamad Husnul Maad
-        </h3>
-        <div className="flex gap-5 mt-3 italic font-light text-justify">
-          <p className="leading-relaxed text-gray-200/90 tracking-wide">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto
-            voluptate alias nemo dolorem aliquid, provident error? Inventore
-            exercitationem praesentium necessitatibus. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit.
-          </p>
-          <p className="leading-relaxed text-gray-200/90 tracking-wide">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod
-            deleniti recusandae non accusantium maiores labore dolorem excepturi
-            itaque deserunt. Quasi! Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Voluptas fugiat earum in consequatur, tenetur,
-            saepe nisi.
-          </p>
+    <div id="about" className=" text-white m-5 rounded-xl overflow-hidden">
+      <h2 className=" mb-5 text-center text-3xl font-bold uppercase p-3 bg-white/20 backdrop-blur-md">
+        About Dziths Chess Coach
+      </h2>
+      <div
+        className="p-5 grid grid-cols-1 md:grid-cols-2 gap-2"
+        style={{ backgroundImage: `url(${coursebg})` }}
+      >
+        <div className="h-96 bg-white/30 backdro p-blur-sm rounded-xl overflow-hidden">
+          <img
+            src={profile}
+            alt="profile"
+            className="w-full h-full object-cover object-top"
+          />
         </div>
-        <div className="card-actions justify-end">
-          <button
-            onClick={handleNavigateToAbout}
-            className="flex items-center gap-2 hover:underline transition-all duration-300 text-red-500 hover:text-red-700"
-          >
-            Selengkapnya <CircleArrowOutUpRight size={18} strokeWidth={1.5} />
-          </button>
+        <div className="bg-[#393E46]/30 backdrop-blur-sm shadow-md p-4 rounded-xl ">
+          <p className="text-sm text-justify mt-10">
+            Dziththauly Ramadhan (CM), lahir di Surabaya pada tahun 2002 dan
+            menekuni dunia catur sejak usia muda. Banyak prestasi yang sudah
+            saya peroleh di dalam dunia catur dan prestasi yang saya raih dalam
+            jangka waktu 4 tahun terakhir adalah meraih Juara 1 Kejurnas Catur
+            Junior Putra A tahun 2021. Pada tahun berikutnya, saya menorehkan
+            prestasi internasional dengan meraih gelar di Asian Junior
+            Championship 2022 di Filipina, serta menambah koleksi medali dengan
+            perunggu ASEAN Youth Chess Rapid 2022. Tahun 2024 menjadi salah satu
+            puncak karier saya dengan keberhasilan meraih medali emas dan perak
+            pada PON XX di Aceh-Sumut, serta tampil gemilang di ASEAN University
+            Games 2024 dengan koleksi tiga emas dan dua perak di nomor beregu
+            maupun individu. Terbaru, pada POMNAS Jateng 2025, saya berhasil
+            menyapu bersih tiga medali emas di nomor kilat, cepat, dan klasik
+            beregu. Dengan konsistensi prestasi ini, saya terus berkomitmen
+            untuk berkembang dan mengharumkan nama Indonesia di kancah
+            catur internasional.
+          </p>
+
+          <div className="card-actions justify-end"></div>
         </div>
-      </div>
-      <div className="h-96 bg-white/30 backdrop-blur-sm rounded-xl overflow-hidden">
-        <img
-          src={profile}
-          alt="profile"
-          className="w-full h-full object-cover object-top"
-        />
       </div>
     </div>
   );

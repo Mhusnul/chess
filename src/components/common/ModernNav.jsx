@@ -7,6 +7,7 @@ import {
   Users,
   BookOpen,
   MessageSquare,
+  Heart,
 } from "lucide-react";
 import useCartStore from "../../store/cartStore";
 
@@ -50,10 +51,19 @@ const ModernNav = () => {
       href: "/contact",
       icon: MessageSquare,
     },
+    {
+      label: "Saweria",
+      href: "https://saweria.co/dzithschess",
+      icon: Heart,
+      external: true,
+    },
   ];
 
-  const handleNavClick = (href) => {
-    if (href.startsWith("/#")) {
+  const handleNavClick = (href, external = false) => {
+    if (external) {
+      // Open external links in new tab
+      window.open(href, "_blank", "noopener,noreferrer");
+    } else if (href.startsWith("/#")) {
       // Handle anchor links - navigate to home first if not there
       if (window.location.pathname !== "/") {
         window.location.href = href;
@@ -90,7 +100,7 @@ const ModernNav = () => {
                 href="/"
                 className="text-2xl font-bold text-white hover:text-red-400 transition-colors duration-300"
               >
-                FulanChess
+                Dizhts Chess
               </a>
             </div>
 
@@ -102,12 +112,16 @@ const ModernNav = () => {
                   return (
                     <button
                       key={index}
-                      onClick={() => handleNavClick(item.href)}
-                      className="group relative px-3 py-2 text-white hover:text-red-700 transition-all duration-300 flex items-center space-x-2"
+                      onClick={() => handleNavClick(item.href, item.external)}
+                      className={`group relative px-3 py-2 text-white hover:text-red-700 transition-all duration-300 flex items-center space-x-2 ${
+                        item.external ? "hover:text-red-500" : ""
+                      }`}
                     >
                       <Icon
                         size={18}
-                        className="transition-transform group-hover:scale-110"
+                        className={`transition-transform group-hover:scale-110 ${
+                          item.external ? "text-red-400" : ""
+                        }`}
                       />
                       <span className="font-medium">{item.label}</span>
                       <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-red-500 to-red-700 group-hover:w-full transition-all duration-300"></div>
@@ -162,14 +176,21 @@ const ModernNav = () => {
               return (
                 <button
                   key={index}
-                  onClick={() => handleNavClick(item.href)}
-                  className="group w-full text-left px-3 py-3 text-white hover:text-red-400 hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 rounded-lg"
+                  onClick={() => handleNavClick(item.href, item.external)}
+                  className={`group w-full text-left px-3 py-3 text-white hover:text-red-400 hover:bg-white/5 transition-all duration-300 flex items-center space-x-3 rounded-lg ${
+                    item.external ? "hover:text-red-500" : ""
+                  }`}
                 >
                   <Icon
                     size={20}
-                    className="transition-transform group-hover:scale-110"
+                    className={`transition-transform group-hover:scale-110 ${
+                      item.external ? "text-red-400" : ""
+                    }`}
                   />
                   <span className="font-medium">{item.label}</span>
+                  {item.external && (
+                    <span className="text-xs text-red-300 opacity-75">↗</span>
+                  )}
                 </button>
               );
             })}
