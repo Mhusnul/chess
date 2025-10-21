@@ -9,7 +9,7 @@ function Hero() {
   return (
     <div
       id="home"
-      className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white pt-7"
+      className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white pt-14 sm:pt-16"
       style={{
         backgroundImage: `url(${board})`,
       }}

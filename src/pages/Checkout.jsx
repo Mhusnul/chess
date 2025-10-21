@@ -176,19 +176,21 @@ const Checkout = () => {
       <>
         <ModernNav />
         <div
-          className="min-h-screen text-white flex items-center justify-center pt-20"
+          className="min-h-screen text-white flex items-center justify-center pt-16 sm:pt-20 px-4"
           style={{
             backgroundImage: `url(${bookBg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 text-center max-w-md border border-white/20">
-            <h2 className="text-2xl font-bold mb-4 text-white">Cart Kosong</h2>
+          <div className="bg-black/70 backdrop-blur-md rounded-xl p-6 sm:p-8 text-center max-w-md w-full border border-white/20">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">
+              Cart Kosong
+            </h2>
             <p className="mb-6 text-white/80">Belum ada item di cart Anda</p>
             <button
               onClick={goBack}
-              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 w-full sm:w-auto"
             >
               Kembali Belanja
             </button>
@@ -205,14 +207,14 @@ const Checkout = () => {
       <>
         <ModernNav />
         <div
-          className="min-h-screen text-white flex items-center justify-center pt-20"
+          className="min-h-screen text-white flex items-center justify-center pt-16 sm:pt-20 px-4"
           style={{
             backgroundImage: `url(${bookBg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="bg-black/70 backdrop-blur-md rounded-xl p-8 text-center max-w-md border border-white/20">
+          <div className="bg-black/70 backdrop-blur-md rounded-xl p-6 sm:p-8 text-center max-w-md w-full border border-white/20">
             <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
                 className="w-8 h-8 text-black"
@@ -228,16 +230,16 @@ const Checkout = () => {
                 ></path>
               </svg>
             </div>
-            <h2 className="text-2xl font-bold mb-4 text-white">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-white">
               Pesanan Berhasil!
             </h2>
-            <p className="mb-6 text-white/80">
+            <p className="mb-6 text-white/80 text-sm sm:text-base">
               Terima kasih! Pesanan Anda sudah dikirim ke WhatsApp. Kami akan
               segera memproses pesanan Anda.
             </p>
             <button
               onClick={() => (window.location.href = "/")}
-              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 w-full sm:w-auto"
             >
               Kembali ke Beranda
             </button>
@@ -250,7 +252,7 @@ const Checkout = () => {
 
   return (
     <>
-      <div className="bg-black font-serif min-h-screen">
+      <div className="bg-black font-serif min-h-screen w-full overflow-x-hidden">
         <ModernNav />
 
         {/* Hero Section */}
@@ -259,14 +261,14 @@ const Checkout = () => {
             backgroundImage: `url(${courseBg})`,
             backgroundSize: "cover",
           }}
-          className="relative min-h-[50vh] flex items-center justify-center"
+          className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center w-full"
         >
           <div className="absolute inset-0 bg-black/60"></div>
-          <div className="relative z-10 text-center text-white px-4">
-            <h1 className="text-5xl font-bold mb-4 mt-12">
+          <div className="relative z-10 text-center text-white px-4 w-full">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 mt-8 sm:mt-12">
               Checkout Pembelian
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
               Selesaikan pembelian Anda dengan mudah dan aman. Ikuti
               langkah-langkah di bawah ini.
             </p>
@@ -274,7 +276,7 @@ const Checkout = () => {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-4 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
           {/* Header dengan Progress */}
           <div className="mb-8">
             <button
@@ -297,18 +299,20 @@ const Checkout = () => {
               Kembali
             </button>
 
-            <div className="bg-black/30 backdrop-blur-md rounded-xl p-6 mb-6 border border-white/20">
-              <h1 className="text-3xl font-bold mb-4 text-white">Checkout</h1>
+            <div className="bg-black/30 backdrop-blur-md rounded-xl p-4 sm:p-6 mb-6 border border-white/20 w-full">
+              <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
+                Checkout
+              </h1>
 
-              {/* Progress Bar */}
-              <div className="flex items-center space-x-4">
+              {/* Progress Bar - Mobile Responsive */}
+              <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <div
                   className={`flex items-center space-x-2 ${
                     currentStep >= 1 ? "text-white" : "text-white/50"
                   }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                       currentStep >= 1
                         ? "bg-yellow-400 text-black"
                         : "bg-white/20"
@@ -316,9 +320,11 @@ const Checkout = () => {
                   >
                     1
                   </div>
-                  <span className="font-medium">Data Pelanggan</span>
+                  <span className="font-medium text-sm sm:text-base">
+                    Data Pelanggan
+                  </span>
                 </div>
-                <div className="flex-1 h-1 bg-white/20 rounded">
+                <div className="hidden sm:flex flex-1 h-1 bg-white/20 rounded">
                   <div
                     className={`h-full bg-yellow-400 rounded transition-all duration-300 ${
                       currentStep >= 2 ? "w-full" : "w-0"
@@ -331,7 +337,7 @@ const Checkout = () => {
                   }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                       currentStep >= 2
                         ? "bg-yellow-400 text-black"
                         : "bg-white/20"
@@ -339,9 +345,11 @@ const Checkout = () => {
                   >
                     2
                   </div>
-                  <span className="font-medium">Pembayaran</span>
+                  <span className="font-medium text-sm sm:text-base">
+                    Pembayaran
+                  </span>
                 </div>
-                <div className="flex-1 h-1 bg-white/20 rounded">
+                <div className="hidden sm:flex flex-1 h-1 bg-white/20 rounded">
                   <div
                     className={`h-full bg-yellow-400 rounded transition-all duration-300 ${
                       currentStep >= 3 ? "w-full" : "w-0"
@@ -354,7 +362,7 @@ const Checkout = () => {
                   }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                       currentStep >= 3
                         ? "bg-yellow-400 text-black"
                         : "bg-white/20"
@@ -362,16 +370,18 @@ const Checkout = () => {
                   >
                     3
                   </div>
-                  <span className="font-medium">Selesai</span>
+                  <span className="font-medium text-sm sm:text-base">
+                    Selesai
+                  </span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full">
             {/* Left Side - Form/Payment */}
-            <div className="space-y-6">
+            <div className="space-y-6 w-full">
               {currentStep === 1 && (
                 /* Step 1: Customer Form */
                 <div className="bg-black/70 backdrop-blur-md rounded-xl p-6 border border-white/20">
@@ -549,53 +559,57 @@ const Checkout = () => {
                 Ringkasan Pesanan
               </h2>
 
-              <div className="space-y-4 mb-6">
+              <div className="space-y-4 mb-6 w-full">
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center space-x-4 py-3 border-b border-white/20"
+                    className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 py-3 border-b border-white/20"
                   >
                     <img
                       src={item.img || "/placeholder-book.jpg"}
                       alt={item.title}
-                      className="w-16 h-20 object-cover rounded"
+                      className="w-16 h-20 object-cover rounded mx-auto sm:mx-0 shrink-0"
                     />
-                    <div className="flex-1">
-                      <h3 className="font-medium text-white">{item.title}</h3>
-                      <p className="text-sm text-white/70 mb-2">
+                    <div className="flex-1 w-full">
+                      <h3 className="font-medium text-white text-center sm:text-left">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-white/70 mb-2 text-center sm:text-left">
                         {item.author && `oleh ${item.author}`}
                       </p>
 
                       {/* Quantity Controls */}
-                      <div className="flex items-center space-x-3 mb-2">
-                        <span className="text-sm text-white/70">Jumlah:</span>
-                        <div className="flex items-center space-x-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-2 sm:space-y-0">
+                        <span className="text-sm text-white/70 text-center sm:text-left">
+                          Jumlah:
+                        </span>
+                        <div className="flex items-center justify-center sm:justify-start space-x-2">
                           <button
                             onClick={() =>
                               handleQuantityChange(item.id, item.quantity - 1)
                             }
-                            className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors"
+                            className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors shrink-0"
                           >
                             <Minus size={16} />
                           </button>
-                          <span className="text-white font-medium w-8 text-center">
+                          <span className="text-white font-medium w-8 text-center shrink-0">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() =>
                               handleQuantityChange(item.id, item.quantity + 1)
                             }
-                            className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors"
+                            className="w-8 h-8 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center transition-colors shrink-0"
                           >
                             <Plus size={16} />
                           </button>
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="w-8 h-8 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors ml-2 shrink-0"
+                          >
+                            <Trash2 size={16} />
+                          </button>
                         </div>
-                        <button
-                          onClick={() => removeFromCart(item.id)}
-                          className="w-8 h-8 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors ml-2"
-                        >
-                          <Trash2 size={16} />
-                        </button>
                       </div>
 
                       <p className="text-sm font-medium text-yellow-400">

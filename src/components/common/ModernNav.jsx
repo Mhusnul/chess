@@ -87,22 +87,26 @@ const ModernNav = () => {
     <>
       {/* Main Navigation */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${
           isScrolled
             ? "bg-black/90 backdrop-blur-lg border-b border-white/10"
             : "bg-black/50 backdrop-blur-md"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="flex justify-between items-center h-14 sm:h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
               <a
                 href="/"
                 className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300"
               >
-                <img src={logo} alt="Dziths Chess" className="h-10 w-auto" />
-                <span className="text-xl font-bold text-white hidden sm:block">
+                <img
+                  src={logo}
+                  alt="Dziths Chess"
+                  className="h-8 sm:h-10 w-auto"
+                />
+                <span className="text-lg sm:text-xl font-bold text-white hidden sm:block">
                   Dziths Chess
                 </span>
               </a>
@@ -168,13 +172,13 @@ const ModernNav = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
+          className={`md:hidden transition-all duration-300 ease-in-out w-full ${
             isMobileMenuOpen
               ? "max-h-screen opacity-100"
               : "max-h-0 opacity-0 overflow-hidden"
           }`}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 bg-black/95 backdrop-blur-lg border-t border-white/10">
+          <div className="px-4 pt-2 pb-4 space-y-1 bg-black/95 backdrop-blur-lg border-t border-white/10 w-full">
             {navItems.map((item, index) => {
               const Icon = item.icon;
               return (

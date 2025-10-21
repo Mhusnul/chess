@@ -10,7 +10,7 @@ import Cart from "../components/common/Cart";
 
 function Home() {
   return (
-    <div className=" font-serif bg-black">
+    <div className="font-serif bg-black overflow-x-hidden w-full">
       <ModernNav />
       <Hero />
       <Aboute />
