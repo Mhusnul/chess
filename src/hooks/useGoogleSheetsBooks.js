@@ -62,8 +62,38 @@ const useGoogleSheetsBooks = () => {
   };
 
   const cleanPrice = (price) => {
-    if (!price) return "0";
-    return price.replace(/[^\d]/g, "");
+    if (!price) return 0;
+
+    // Remove currency symbols and clean whitespace
+    let cleanedPrice = price.toString().replace(/[Rp\s]/g, "");
+
+    // Handle decimal separators (both comma and dot)
+    // Replace comma with dot for proper parsing
+    cleanedPrice = cleanedPrice.replace(/,/g, ".");
+
+    // If there are multiple dots, assume the last one is decimal separator
+    const dotCount = (cleanedPrice.match(/\./g) || []).length;
+    if (dotCount > 1) {
+      // Remove all dots except the last one (thousands separator)
+      const lastDotIndex = cleanedPrice.lastIndexOf(".");
+      cleanedPrice =
+        cleanedPrice.substring(0, lastDotIndex).replace(/\./g, "") +
+        cleanedPrice.substring(lastDotIndex);
+    } else if (dotCount === 1) {
+      // Check if it's thousands separator or decimal
+      const parts = cleanedPrice.split(".");
+      if (parts[1] && parts[1].length === 3 && !parts[1].includes("0")) {
+        // Likely thousands separator (e.g., 15.000)
+        cleanedPrice = cleanedPrice.replace(".", "");
+      }
+      // Otherwise it's decimal separator, keep it
+    }
+
+    const parsed = parseFloat(cleanedPrice) || 0;
+    console.log(
+      `💰 Price parsing: "${price}" -> "${cleanedPrice}" -> ${parsed}`
+    );
+    return Math.round(parsed); // Return as integer
   };
 
   useEffect(() => {

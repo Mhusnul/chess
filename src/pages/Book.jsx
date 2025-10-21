@@ -28,7 +28,7 @@ function Book() {
   const { addToCart, getItemQuantity } = useCartStore();
   const { showToast, ToastComponent } = useToast();
 
-  // Toggle expand/collapse for specific card
+  // Existing functionality remains the same
   const toggleExpand = (bookId) => {
     const newExpanded = new Set(expandedCards);
     if (newExpanded.has(bookId)) {
@@ -39,20 +39,17 @@ function Book() {
     setExpandedCards(newExpanded);
   };
 
-  // Format price to Indonesian Rupiah
   const formatPrice = (price) => {
+    const numericPrice = parseInt(price) || 0;
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0,
-    }).format(price);
+    }).format(numericPrice);
   };
 
-  // Update filtered books when sheets data changes
   useEffect(() => {
     setFilteredBooks(sheetsBooks);
-
-    // Preload images
     sheetsBooks.forEach((book) => {
       if (book.cover) {
         const img = new Image();
@@ -61,7 +58,6 @@ function Book() {
     });
   }, [sheetsBooks]);
 
-  // Handle search filtering
   useEffect(() => {
     if (!sheetsBooks) return;
 
@@ -81,12 +77,12 @@ function Book() {
     setFilteredBooks(filtered);
   }, [searchTerm, sheetsBooks]);
 
-  // Handle add to cart
   const handleAddToCart = (book) => {
+    const price = parseInt(book.price) || 0;
     const cartBook = {
       id: book.id,
       title: book.title,
-      price: parseFloat(book.price) || 0,
+      price: price,
       img: book.cover || "/placeholder-book.jpg",
       desc: book.deskripsi || "Deskripsi akan segera tersedia.",
       author: "Chess Academy",
@@ -96,13 +92,10 @@ function Book() {
     showToast(`"${book.title}" ditambahkan ke keranjang!`, "success");
   };
 
-  // Log image errors for debugging
   const logImageError = (bookId, url, error) => {
-    // Simplified error logging
     console.error(`Image load error for book ${bookId}:`, error);
   };
 
-  // Go back function
   const goBack = () => {
     window.history.back();
   };
@@ -118,14 +111,14 @@ function Book() {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center"
+        className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
       >
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 mt-8 sm:mt-12">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black"></div>
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight animate-fade-in">
             Koleksi Buku Catur
           </h1>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed animate-fade-in-up">
             Temukan buku-buku terbaik untuk meningkatkan kemampuan catur Anda.
             Dari strategi dasar hingga teknik lanjutan, koleksi lengkap untuk
             semua level.
@@ -134,24 +127,27 @@ function Book() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 py-16">
         <ToastComponent />
 
         {/* Back Button */}
         <button
           onClick={goBack}
-          className="mb-6 flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
+          className="mb-8 group flex items-center space-x-2 text-white/80 hover:text-white transition-all duration-300"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft
+            size={20}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
           <span>Kembali</span>
         </button>
 
         {/* Search Section */}
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/20">
+        <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 mb-12 border border-white/10 shadow-xl">
           <div className="flex justify-center">
-            <div className="relative w-full max-w-lg">
+            <div className="relative w-full max-w-2xl">
               <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/60 group-hover:text-white transition-colors"
                 size={20}
               />
               <input
@@ -159,63 +155,75 @@ function Book() {
                 placeholder="Cari berdasarkan judul, deskripsi, bahasa, atau kategori..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:border-red-500 transition-colors"
+                className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300"
               />
             </div>
           </div>
-        </div>
 
-        {/* Results Info */}
-        <div className="mb-6">
-          <p className="text-white/80">
-            Menampilkan {filteredBooks.length} dari {sheetsBooks.length} buku
-          </p>
+          {/* Results Info */}
+          <div className="mt-4 text-center">
+            <p className="text-white/60">
+              Menampilkan{" "}
+              <span className="text-white font-semibold">
+                {filteredBooks.length}
+              </span>{" "}
+              dari{" "}
+              <span className="text-white font-semibold">
+                {sheetsBooks.length}
+              </span>{" "}
+              buku
+            </p>
+          </div>
         </div>
 
         {/* Loading State */}
         {loading && (
-          <div className="flex justify-center items-center py-12">
+          <div className="flex justify-center items-center py-16">
             <div className="text-center">
-              <Loader className="animate-spin w-8 h-8 mx-auto mb-4 text-red-600" />
-              <p className="text-gray-400">Memuat data buku...</p>
+              <Loader className="animate-spin w-12 h-12 mx-auto mb-4 text-red-600" />
+              <p className="text-lg text-gray-400 animate-pulse">
+                Memuat data buku...
+              </p>
             </div>
           </div>
         )}
 
         {/* Error State */}
         {error && (
-          <div className="flex justify-center items-center py-12">
-            <div className="text-center">
-              <BookOpen className="w-8 h-8 mx-auto mb-4 text-red-600" />
-              <p className="text-gray-400">Gagal memuat data buku</p>
-              <p className="text-gray-600 text-sm mt-2">{error}</p>
+          <div className="flex justify-center items-center py-16">
+            <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20 text-center max-w-md">
+              <BookOpen className="w-12 h-12 mx-auto mb-4 text-red-600" />
+              <h3 className="text-xl font-bold text-white mb-2">
+                Gagal memuat data
+              </h3>
+              <p className="text-gray-400 mb-4">
+                Terjadi kesalahan saat memuat data buku
+              </p>
+              <p className="text-gray-600 text-sm">{error}</p>
             </div>
           </div>
         )}
 
         {/* Books Grid */}
         {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {filteredBooks.map((book, index) => {
               const quantity = getItemQuantity(book.id);
-              const cardBg = index % 2 === 0 ? "bg-white/30" : "bg-black/30";
 
               return (
                 <div
                   key={book.id}
-                  className={`${cardBg} backdrop-blur-md rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 group`}
+                  className="group relative bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 shadow-xl transition-all duration-300 hover:transform hover:scale-[1.02] hover:border-white/20"
                 >
                   {/* Book Cover */}
-                  <div className="relative w-full aspect-[3/4] bg-black">
+                  <div className="relative w-full aspect-[3/4] bg-gradient-to-br from-black/60 to-black/40 overflow-hidden">
                     {book.cover && !imageErrors[book.id] ? (
                       <>
-                        {/* Loading placeholder */}
                         <div className="absolute inset-0 bg-black animate-pulse" />
-
                         <img
                           src={book.cover}
                           alt={book.title}
-                          className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300 relative z-10"
+                          className="w-full h-full object-contain p-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-1 relative z-10"
                           onLoad={(e) => {
                             e.target.previousSibling.style.opacity = 0;
                           }}
@@ -230,7 +238,7 @@ function Book() {
                         />
                       </>
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 bg-gray-800 group-hover:bg-gray-700 transition-colors duration-300">
+                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 bg-gradient-to-br from-gray-800/50 to-gray-900/50 transition-colors duration-300">
                         <BookOpen
                           size={48}
                           className="group-hover:scale-110 transition-transform duration-300"
@@ -247,28 +255,24 @@ function Book() {
                   </div>
 
                   {/* Book Info */}
-                  <div className="p-6">
+                  <div className="p-6 space-y-4">
                     {/* Category Badge */}
-                    <div className="mb-3">
-                      <span className="inline-block bg-red-600/20 text-red-400 px-3 py-1 rounded-full text-sm font-medium">
+                    <div className="flex flex-wrap gap-2">
+                      <span className="inline-flex items-center bg-gradient-to-r from-red-600/20 to-red-700/20 text-red-400 px-3 py-1 rounded-full text-sm font-medium">
                         📚 {book.category}
                       </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors line-clamp-2">
-                      {book.title}
-                    </h3>
-
-                    {/* Language Badge */}
-                    <div className="mb-3">
-                      <span className="inline-block bg-blue-600/20 text-blue-400 px-2 py-1 rounded text-xs font-medium">
+                      <span className="inline-flex items-center bg-gradient-to-r from-blue-600/20 to-blue-700/20 text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
                         🌐 {book.bahasa}
                       </span>
                     </div>
 
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors line-clamp-2">
+                      {book.title}
+                    </h3>
+
                     {/* Description */}
-                    <div className="mb-4">
+                    <div>
                       <div
                         className={`text-white/70 text-sm transition-all duration-300 ${
                           expandedCards.has(book.id) ? "" : "line-clamp-3"
@@ -279,16 +283,16 @@ function Book() {
                       {book.deskripsi && book.deskripsi.length > 150 && (
                         <button
                           onClick={() => toggleExpand(book.id)}
-                          className="flex items-center gap-1 mt-2 text-yellow-400 hover:text-yellow-300 transition-colors text-xs font-medium hover:underline"
+                          className="flex items-center gap-1 mt-2 text-yellow-400 hover:text-yellow-300 transition-colors text-sm font-medium group"
                         >
                           {expandedCards.has(book.id) ? (
                             <>
-                              <ChevronUp className="w-3 h-3" />
+                              <ChevronUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                               Tutup
                             </>
                           ) : (
                             <>
-                              <ChevronDown className="w-3 h-3" />
+                              <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                               Selengkapnya
                             </>
                           )}
@@ -297,10 +301,10 @@ function Book() {
                     </div>
 
                     {/* Price and Add to Cart */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <div>
-                        {parseInt(book.price) > 0 ? (
-                          <div className="text-2xl font-bold text-yellow-400">
+                        {book.price && parseInt(book.price) > 0 ? (
+                          <div className="text-2xl font-bold text-yellow-400 group-hover:text-yellow-300 transition-colors">
                             {formatPrice(parseInt(book.price))}
                           </div>
                         ) : (
@@ -311,26 +315,32 @@ function Book() {
                       </div>
 
                       <div className="flex gap-2">
-                        {parseInt(book.price) > 0 ? (
+                        {book.price && parseInt(book.price) > 0 ? (
                           <>
                             <button
                               onClick={() => handleAddToCart(book)}
-                              className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-semibold flex items-center gap-2"
+                              className="bg-gradient-to-r from-white to-gray-200 text-black px-4 py-2 rounded-xl hover:from-gray-200 hover:to-gray-300 transition-all duration-300 font-semibold flex items-center gap-2 group"
                             >
-                              <ShoppingCart size={16} />
+                              <ShoppingCart
+                                size={16}
+                                className="group-hover:scale-110 transition-transform"
+                              />
                               {quantity > 0 ? `(${quantity})` : "Beli"}
                             </button>
                             <button
                               onClick={() => handleAddToCart(book)}
-                              className="bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                              className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-2 rounded-xl hover:from-gray-700 hover:to-gray-800 transition-all duration-300"
                             >
-                              <Plus size={16} />
+                              <Plus
+                                size={16}
+                                className="transform group-hover:rotate-180 transition-transform"
+                              />
                             </button>
                           </>
                         ) : (
                           <button
                             disabled
-                            className="bg-gray-600 text-gray-300 px-4 py-2 rounded-lg cursor-not-allowed font-semibold flex items-center gap-2"
+                            className="bg-gradient-to-r from-gray-600 to-gray-700 text-gray-300 px-4 py-2 rounded-xl cursor-not-allowed font-semibold flex items-center gap-2 opacity-50"
                           >
                             <ShoppingCart size={16} />
                             Coming Soon
@@ -347,18 +357,18 @@ function Book() {
 
         {/* No Results */}
         {!loading && !error && filteredBooks.length === 0 && (
-          <div className="text-center py-12">
-            <div className="bg-black/50 backdrop-blur-md rounded-xl p-8 max-w-md mx-auto border border-white/20">
+          <div className="text-center py-16">
+            <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 max-w-md mx-auto border border-white/10 shadow-xl">
               <BookOpen className="w-16 h-16 mx-auto mb-4 text-red-600" />
-              <h3 className="text-xl font-bold mb-2 text-white">
+              <h3 className="text-2xl font-bold mb-4 text-white">
                 Tidak ada buku ditemukan
               </h3>
-              <p className="text-white/80 mb-4">
+              <p className="text-white/80 mb-6">
                 Coba ubah kata kunci pencarian Anda
               </p>
               <button
                 onClick={() => setSearchTerm("")}
-                className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors text-white"
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 px-6 py-3 rounded-xl transition-all duration-300 text-white font-semibold transform hover:scale-105"
               >
                 Reset Pencarian
               </button>
