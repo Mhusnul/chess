@@ -14,6 +14,8 @@ import {
   Loader,
   AlertCircle,
   Filter,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import coursebg from "../assets/course-bg.jpg";
 
@@ -22,6 +24,18 @@ function Class() {
   const { addToCart } = useCartStore();
   const { showToast, ToastComponent } = useToast();
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [expandedCards, setExpandedCards] = useState(new Set());
+
+  // Toggle expand/collapse for specific card
+  const toggleExpand = (courseId) => {
+    const newExpanded = new Set(expandedCards);
+    if (newExpanded.has(courseId)) {
+      newExpanded.delete(courseId);
+    } else {
+      newExpanded.add(courseId);
+    }
+    setExpandedCards(newExpanded);
+  };
 
   // Filter courses by category
   const filteredCourses = useMemo(() => {
@@ -259,9 +273,36 @@ function Class() {
                       <p className="text-xs text-white font-medium mb-1">
                         Materi:
                       </p>
-                      <p className="text-xs text-white/70 line-clamp-4">
-                        {courseItem.materi}
-                      </p>
+                      <div className="text-xs text-white/70">
+                        <div
+                          className={`transition-all duration-300 ${
+                            expandedCards.has(courseItem.id)
+                              ? ""
+                              : "line-clamp-3"
+                          }`}
+                        >
+                          {courseItem.materi}
+                        </div>
+                        {courseItem.materi &&
+                          courseItem.materi.length > 150 && (
+                            <button
+                              onClick={() => toggleExpand(courseItem.id)}
+                              className="flex items-center gap-1 mt-2 text-yellow-400 hover:text-yellow-300 transition-colors text-xs font-medium hover:underline"
+                            >
+                              {expandedCards.has(courseItem.id) ? (
+                                <>
+                                  <ChevronUp className="w-3 h-3" />
+                                  Tutup
+                                </>
+                              ) : (
+                                <>
+                                  <ChevronDown className="w-3 h-3" />
+                                  Selengkapnya
+                                </>
+                              )}
+                            </button>
+                          )}
+                      </div>
                     </div>
 
                     {/* Action Button */}

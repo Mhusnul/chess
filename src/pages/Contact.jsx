@@ -14,6 +14,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import courseBg from "../assets/chess-bg2.jpg";
+import Content from "../components/section/Content.jsx";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -179,59 +180,8 @@ function Contact() {
                       <h3 className="text-lg font-semibold text-white mb-1">
                         Telepon
                       </h3>
-                      <p className="text-gray-300">+62 21 1234 5678</p>
                       <p className="text-gray-300">
                         +62 853 3773 5757 (WhatsApp)
-                      </p>
-                      <button
-                        onClick={() => {
-                          const quickMessage = encodeURIComponent(
-                            "Halo, saya ingin bertanya tentang kelas catur"
-                          );
-                          const whatsappNumber = "6285337735757";
-                          const isMobile =
-                            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                              navigator.userAgent
-                            );
-
-                          if (isMobile) {
-                            const mobileUrl = `whatsapp://send?phone=${whatsappNumber}&text=${quickMessage}`;
-                            const webUrl = `https://wa.me/${whatsappNumber}?text=${quickMessage}`;
-
-                            window.location.href = mobileUrl;
-                            setTimeout(() => {
-                              window.open(webUrl, "_blank");
-                            }, 1000);
-                          } else {
-                            window.open(
-                              `https://wa.me/${whatsappNumber}?text=${quickMessage}`,
-                              "_blank"
-                            );
-                          }
-                        }}
-                        className="mt-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
-                      >
-                        <MessageSquare size={16} />
-                        Chat WhatsApp
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Address */}
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-red-600 p-3 rounded-lg">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-white mb-1">
-                        Alamat
-                      </h3>
-                      <p className="text-gray-300">
-                        Jl. Catur Raya No. 123
-                        <br />
-                        Jakarta Selatan 12345
-                        <br />
-                        Indonesia
                       </p>
                     </div>
                   </div>
@@ -248,8 +198,8 @@ function Contact() {
                       <p className="text-gray-300">
                         Senin - Jumat: 09:00 - 18:00
                       </p>
-                      <p className="text-gray-300">Sabtu: 09:00 - 15:00</p>
-                      <p className="text-gray-300">Minggu: Tutup</p>
+
+                      <p className="text-gray-300">Sabtu - Minggu: Tutup</p>
                     </div>
                   </div>
                 </div>
@@ -449,6 +399,8 @@ function Contact() {
               )}
             </div>
           </div>
+
+          <Content />
 
           {/* Map Section */}
           <div className="bg-black/50 backdrop-blur-md rounded-xl p-8">
