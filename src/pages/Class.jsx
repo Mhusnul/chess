@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import coursebg from "../assets/course-bg.jpg";
+import chessBg3 from "../assets/chess-bg3.jpg";
 
 function Class() {
   // Existing state and hooks
@@ -37,6 +38,21 @@ function Class() {
       newExpanded.add(courseId);
     }
     setExpandedCards(newExpanded);
+  };
+
+  // Get card background style - same for all cards
+  const getCardBackground = () => {
+    return {
+      backgroundImage: `url(${chessBg3})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    };
+  };
+
+  // Get card classes - same for all cards
+  const getCardClasses = () => {
+    return "group bg-black/70 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl overflow-hidden transition-all duration-300 hover:transform hover:scale-[1.02] hover:border-white/20 hover:shadow-2xl relative";
   };
 
   const filteredCourses = useMemo(() => {
@@ -68,7 +84,7 @@ function Class() {
   };
 
   return (
-    <div className="bg-black font-serif min-h-screen">
+    <div className="bg-black font-serif min-h-screen overflow-x-hidden">
       <ModernNav />
 
       {/* Hero Section */}
@@ -94,30 +110,30 @@ function Class() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <ToastComponent />
 
         {/* Category Filter */}
-        <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 mb-12 border border-white/10 shadow-xl">
-          <div className="flex items-center gap-3 mb-8">
-            <Filter className="w-6 h-6 text-red-500" />
-            <h3 className="text-2xl font-bold text-white">
-              Filter by Category
+        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 sm:p-6 mb-8 border border-white/20">
+          <div className="flex items-center gap-2 mb-4">
+            <Filter className="w-4 h-4 text-red-500" />
+            <h3 className="text-lg font-semibold text-white">
+              Filter Kategori
             </h3>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
                   selectedCategory === category
-                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg transform scale-105"
-                    : "bg-white/10 text-gray-300 border-white/20 hover:bg-white/20 hover:text-white hover:scale-105"
-                } border backdrop-blur-md`}
+                    ? "bg-red-600 text-white"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                } border border-white/20`}
               >
                 {category}
-                <span className="ml-2 text-xs opacity-75">
+                <span className="ml-1 text-xs opacity-75">
                   {category === "All"
                     ? `(${courses.length})`
                     : `(${
@@ -134,24 +150,24 @@ function Class() {
         </div>
 
         {/* Course List */}
-        <div className="mb-12">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">
+              <h2 className="text-2xl font-bold text-white mb-1">
                 {selectedCategory === "All"
-                  ? "Semua Kelas Tersedia"
+                  ? "Semua Kelas"
                   : `Kelas ${selectedCategory}`}
               </h2>
-              <p className="text-gray-400">
-                Menampilkan {filteredCourses.length} kelas
+              <p className="text-gray-400 text-sm">
+                {filteredCourses.length} kelas tersedia
               </p>
             </div>
             <button
               onClick={refetch}
-              className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2"
             >
               <Sparkles className="w-4 h-4" />
-              Refresh Data
+              Refresh
             </button>
           </div>
 
@@ -188,20 +204,23 @@ function Class() {
 
           {/* Course Grid */}
           {!loading && !error && filteredCourses.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredCourses.map((courseItem) => (
                 <div
                   key={courseItem.id}
-                  className="group bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl overflow-hidden transition-all duration-300 hover:transform hover:scale-[1.02] hover:border-white/20"
+                  className={getCardClasses()}
+                  style={getCardBackground()}
                 >
+                  {/* Background overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80"></div>
+
                   {/* Course Header */}
-                  <div className="p-6 border-b border-white/10">
+                  <div className="p-6 border-b border-white/10 relative z-10">
                     <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="inline-flex items-center bg-gradient-to-r from-red-600/20 to-red-700/20 text-red-400 px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-500/90 text-black backdrop-blur-sm shadow-lg">
                         📚 {courseItem.category}
                       </span>
                     </div>
-
                     <h4 className="text-xl font-bold text-white mb-3 capitalize group-hover:text-yellow-400 transition-colors">
                       {courseItem.title}
                     </h4>
@@ -212,15 +231,15 @@ function Class() {
                   </div>
 
                   {/* Course Details */}
-                  <div className="p-6 space-y-4">
-                    <div className="flex items-center gap-3 text-white/80">
+                  <div className="p-6 space-y-4 relative z-10">
+                    <div className="flex items-center gap-3 text-white">
                       <Clock className="w-5 h-5 text-red-500" />
                       <span className="text-sm">
                         {courseItem.pertemuan} • {courseItem.jamPelatihan}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3 text-white/70">
+                    <div className="flex items-center gap-3 text-white">
                       <Users className="w-5 h-5 text-blue-500" />
                       <span className="text-sm">{courseItem.keterangan}</span>
                     </div>
@@ -235,18 +254,18 @@ function Class() {
                     )}
 
                     {courseItem.syarat && (
-                      <div className="flex items-center gap-3 text-white/60">
+                      <div className="flex items-center gap-3 text-white">
                         <AlertCircle className="w-5 h-5" />
                         <span className="text-sm">{courseItem.syarat}</span>
                       </div>
                     )}
 
                     {/* Materi Preview */}
-                    <div className="bg-black/30 rounded-xl p-4">
+                    <div className="bg-black/55 rounded-xl p-4">
                       <p className="text-sm font-medium text-white mb-2">
                         Materi:
                       </p>
-                      <div className="text-sm text-white/70">
+                      <div className="text-sm text-white">
                         <div
                           className={`transition-all duration-300 ${
                             expandedCards.has(courseItem.id)
