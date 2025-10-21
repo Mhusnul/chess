@@ -1,10 +1,10 @@
-import React from "react";
 import Home from "./pages/Home";
 import Class from "./pages/Class";
 import Book from "./pages/Book";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
 import WhatsAppFloat from "./components/common/WhatsAppFloat";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   // Simple routing based on URL path
@@ -26,6 +26,7 @@ function App() {
 
       {/* WhatsApp Float Button - appears on all pages */}
       <WhatsAppFloat />
+      <SpeedInsights />
     </>
   );
 }

@@ -18,12 +18,12 @@ function Course() {
         <div className="h-full flex flex-col justify-between gap-4">
           <div>
             <h3 className="font-bold text-3xl mb-4">
-              Jadikan Papan Catur Panggung Kemenanganmu
+              Jadikan Papan Catur Panggung Kemenanganmu!
             </h3>
             <p className="font-light text-lg">
-              Pelajari seni catur bukan hanya untuk menang, tapi untuk berpikir
-              lebih tajam dalam hidup. Kelas ini untuk kamu yang ingin serius
-              melangkah lebih jauh.
+              Improve strategi permainan catur menjadi lebih baik dan lebih
+              terarah. Jadilah pemain yang memiliki pemikiran yang tinggi dan
+              raih banyak kemenangan!
             </p>
           </div>
           <RollingGallery autoplay={true} pauseOnHover={true} />

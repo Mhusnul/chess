@@ -64,13 +64,13 @@ function Content() {
             </div>
             <div className="mt-4">
               <h4 className="text-lg font-semibold">
-                Strategi Opening Terbaik untuk Pemula
+                Tonton Konten-konten Menarik Lainnya!
               </h4>
               <p className="text-gray-300 text-sm mt-2">
-                Pelajari 5 opening catur terbaik yang wajib dikuasai oleh setiap
-                pemula. Video ini akan memandu Anda langkah demi langkah dengan
-                penjelasan yang mudah dipahami.
+                Banyak video-video menarik lainnya loh! Kunjungi akun youtube
+                coach untuk cek lebih banyak!
               </p>
+                        
             </div>
           </div>
         </div>
