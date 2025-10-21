@@ -72,7 +72,7 @@ function Book() {
     const cartBook = {
       id: book.id,
       title: book.title,
-      price: parseFloat(book.formattedPrice) || 0,
+      price: parseFloat(book.price) || 0,
       img: book.cover || "/placeholder-book.jpg",
       desc: book.deskripsi || "Deskripsi akan segera tersedia.",
       author: "Chess Academy",
@@ -255,9 +255,9 @@ function Book() {
                     {/* Price and Add to Cart */}
                     <div className="flex items-center justify-between">
                       <div>
-                        {parseInt(book.formattedPrice) > 0 ? (
+                        {parseInt(book.price) > 0 ? (
                           <div className="text-2xl font-bold text-yellow-400">
-                            {formatPrice(parseInt(book.formattedPrice))}
+                            {formatPrice(parseInt(book.price))}
                           </div>
                         ) : (
                           <div className="text-xl font-bold text-gray-400">
@@ -267,7 +267,7 @@ function Book() {
                       </div>
 
                       <div className="flex gap-2">
-                        {parseInt(book.formattedPrice) > 0 ? (
+                        {parseInt(book.price) > 0 ? (
                           <>
                             <button
                               onClick={() => handleAddToCart(book)}

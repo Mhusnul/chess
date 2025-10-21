@@ -1,6 +1,5 @@
 import board from "../../assets/pion-board.jpg";
 import LightRays from "../common/LightRays";
-import ScrollVelocity from "../common/ScrollVelocity";
 import SplitText from "../common/SplitText";
 
 function Hero() {

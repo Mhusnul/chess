@@ -42,14 +42,52 @@ function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Validasi form
+      if (!formData.name || !formData.message) {
+        showToast("Harap isi nama dan pesan terlebih dahulu", "error");
+        setIsSubmitting(false);
+        return;
+      }
 
-      setIsSubmitted(true);
-      showToast(
-        "Pesan berhasil dikirim! Kami akan segera menghubungi Anda.",
-        "success"
+      // Format WhatsApp message
+      const waMessage = encodeURIComponent(
+        `*PESAN DARI WEBSITE*\n\n` +
+          `Nama: ${formData.name}\n` +
+          `Email: ${formData.email}\n` +
+          `Telepon: ${formData.phone}\n` +
+          `Subjek: ${formData.subject}\n\n` +
+          `Pesan:\n${formData.message}`
       );
+
+      // Open WhatsApp with device detection
+      const whatsappNumber = "6285337735757";
+      const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+
+      if (isMobile) {
+        // Untuk mobile, coba buka aplikasi langsung
+        const mobileUrl = `whatsapp://send?phone=${whatsappNumber}&text=${waMessage}`;
+        const webUrl = `https://wa.me/${whatsappNumber}?text=${waMessage}`;
+
+        window.location.href = mobileUrl;
+
+        // Fallback ke web setelah delay singkat
+        setTimeout(() => {
+          window.open(webUrl, "_blank");
+        }, 1000);
+      } else {
+        // Untuk desktop, langsung ke WhatsApp Web
+        window.open(
+          `https://wa.me/${whatsappNumber}?text=${waMessage}`,
+          "_blank"
+        );
+      }
+
+      // Show success message
+      setIsSubmitted(true);
+      showToast("Pesan berhasil dikirim ke WhatsApp!", "success");
 
       // Reset form
       setFormData({
@@ -126,8 +164,9 @@ function Contact() {
                       <h3 className="text-lg font-semibold text-white mb-1">
                         Email
                       </h3>
-                      <p className="text-gray-300">info@fulanchess.com</p>
-                      <p className="text-gray-300">support@fulanchess.com</p>
+                      <p className="text-gray-300">
+                        dziththaulyramadhan@gmail.com
+                      </p>
                     </div>
                   </div>
 
@@ -142,8 +181,39 @@ function Contact() {
                       </h3>
                       <p className="text-gray-300">+62 21 1234 5678</p>
                       <p className="text-gray-300">
-                        +62 812 3456 7890 (WhatsApp)
+                        +62 853 3773 5757 (WhatsApp)
                       </p>
+                      <button
+                        onClick={() => {
+                          const quickMessage = encodeURIComponent(
+                            "Halo, saya ingin bertanya tentang kelas catur"
+                          );
+                          const whatsappNumber = "6285337735757";
+                          const isMobile =
+                            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                              navigator.userAgent
+                            );
+
+                          if (isMobile) {
+                            const mobileUrl = `whatsapp://send?phone=${whatsappNumber}&text=${quickMessage}`;
+                            const webUrl = `https://wa.me/${whatsappNumber}?text=${quickMessage}`;
+
+                            window.location.href = mobileUrl;
+                            setTimeout(() => {
+                              window.open(webUrl, "_blank");
+                            }, 1000);
+                          } else {
+                            window.open(
+                              `https://wa.me/${whatsappNumber}?text=${quickMessage}`,
+                              "_blank"
+                            );
+                          }
+                        }}
+                        className="mt-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
+                      >
+                        <MessageSquare size={16} />
+                        Chat WhatsApp
+                      </button>
                     </div>
                   </div>
 
@@ -361,7 +431,7 @@ function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-red-600 hover:bg-red-700 disabled:bg-red-600/50 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+                    className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-600/50 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -370,7 +440,7 @@ function Contact() {
                       </>
                     ) : (
                       <>
-                        <Send className="w-5 h-5" />
+                        <MessageSquare className="w-5 h-5" />
                         <span>Kirim Pesan</span>
                       </>
                     )}

@@ -1,7 +1,7 @@
 import coursebg from "../../assets/chess-bg3.jpg";
+import logo from "../../assets/logo1.png";
 import {
   Home,
-  Info,
   Trophy,
   BookOpen,
   Book,
@@ -22,11 +22,11 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand & About */}
           <div>
-            <h2 className="text-xl font-bold mb-4">FulanChess</h2>
-            <p className="text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-              praesentium repudiandae exercitationem tempora doloribus qui rem
-              quam.
+            <h2 className="text-xl font-bold mb-4">Dziths Chess</h2>
+            <p className="text-sm leading-relaxed ">
+              Tempat belajar catur yang tepat untuk mengasah kemampuan strategis
+              dan mental. Bergabunglah dengan kami untuk mengembangkan skill
+              catur dari dasar hingga mahir.
             </p>
           </div>
 
@@ -34,23 +34,37 @@ function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-3">Navigate</h3>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <Home size={16} /> Home
+              <li>
+                <a
+                  href="/"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <Home size={16} /> Home
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Info size={16} /> About
+              <li>
+                <a
+                  href="/class"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <PlaySquare size={16} /> Kelas
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Trophy size={16} /> Achievements
+              <li>
+                <a
+                  href="/book"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <BookOpen size={16} /> Books
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <PlaySquare size={16} /> Courses
-              </li>
-              <li className="flex items-center gap-2">
-                <BookOpen size={16} /> Books
-              </li>
-              <li className="flex items-center gap-2">
-                <PlaySquare size={16} /> Content
+              <li>
+                <a
+                  href="/contact"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <Phone size={16} /> Contact
+                </a>
               </li>
             </ul>
           </div>
@@ -59,14 +73,23 @@ function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <Phone size={16} /> Contact
+              <li>
+                <a
+                  href="/checkout"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <BookOpen size={16} /> Checkout
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <BookOpen size={16} /> Privacy Policy
-              </li>
-              <li className="flex items-center gap-2">
-                <BookOpen size={16} /> Terms of Service
+              <li>
+                <a
+                  href="https://saweria.co/dzithschess"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <Trophy size={16} /> Donasi (Saweria)
+                </a>
               </li>
             </ul>
           </div>
@@ -75,14 +98,26 @@ function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-3">Services</h3>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <PlaySquare size={16} /> Online Classes
+              <li>
+                <a
+                  href="/class"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <PlaySquare size={16} /> Kelas Catur Online
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Book size={16} /> Books & Publications
+              <li>
+                <a
+                  href="/book"
+                  className="flex items-center gap-2 hover:text-red-400 transition-colors"
+                >
+                  <Book size={16} /> Buku & E-Book Catur
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <PlaySquare size={16} /> Digital Content
+              <li>
+                <span className="flex items-center gap-2 text-gray-300">
+                  <PlaySquare size={16} /> Content Digital
+                </span>
               </li>
             </ul>
           </div>
@@ -94,17 +129,21 @@ function Footer() {
             <MapPin size={16} /> Jakarta
           </div>
           <div className="flex items-center gap-2 mb-2 md:mb-0">
-            <Phone size={16} /> 0982-8723-187
+            <Phone size={16} /> +62 853 3773 5757
           </div>
           <div className="flex items-center gap-2">
-            <Mail size={16} /> email@example.com
+            <Mail size={16} /> dziththaulyramadhan@gmail.com
           </div>
         </div>
 
         {/* Copyright */}
         <div className="bg-black/50 backdrop-blur-md py-4 rounded-lg mt-5">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <img src={logo} alt="Dziths Chess" className="h-6 w-auto" />
+            <span className="text-sm font-semibold">Dziths Chess</span>
+          </div>
           <p className="text-center text-xs">
-            &copy; 2023 HusnulChess. All rights reserved.
+            &copy; 2023 Dziths Chess. All rights reserved.
           </p>
         </div>
       </div>

@@ -103,7 +103,7 @@ const Checkout = () => {
         .join("\n");
 
       const message = encodeURIComponent(
-        `*PESANAN BUKU*\n\n` +
+        `*PESANAN*\n\n` +
           `Order ID: ${orderId}\n` +
           `Nama: ${customerData.name}\n` +
           `Email: ${customerData.email}\n` +
@@ -116,11 +116,34 @@ const Checkout = () => {
           `Terima kasih!`
       );
 
-      // Buka WhatsApp (ganti nomor dengan nomor WA yang sesuai)
-      const whatsappNumber = "6281288750248"; // Ganti dengan nomor WA bisnis
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+      // Buka WhatsApp dengan deteksi device dan fallback
+      const whatsappNumber = "6285337735757"; // Nomor WA bisnis yang baru
 
-      // Clear cart dan pindah ke success
+      // Deteksi apakah user menggunakan mobile device
+      const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+
+      if (isMobile) {
+        // Untuk mobile, coba buka aplikasi langsung dengan URL scheme
+        const mobileUrl = `whatsapp://send?phone=${whatsappNumber}&text=${message}`;
+        const webUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+        // Coba buka aplikasi, jika gagal fallback ke web
+        window.location.href = mobileUrl;
+
+        // Fallback ke web setelah delay singkat jika aplikasi tidak terbuka
+        setTimeout(() => {
+          window.open(webUrl, "_blank");
+        }, 1000);
+      } else {
+        // Untuk desktop, langsung ke WhatsApp Web
+        window.open(
+          `https://wa.me/${whatsappNumber}?text=${message}`,
+          "_blank"
+        );
+      } // Clear cart dan pindah ke success
       clearCart();
       setCurrentStep(3);
     } catch (error) {

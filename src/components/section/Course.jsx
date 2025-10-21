@@ -1,12 +1,13 @@
 import { Atom, CalendarSync, SmilePlus, BrickWallFire } from "lucide-react";
 import course from "../../assets/chess-bg.jpg";
 import coursebg from "../../assets/course-bg.jpg";
+import RollingGallery from "../common/RollingGallery ";
 
 function Course() {
   return (
     <>
       <h2 className=" m-5 text-center text-3xl font-bold uppercase p-3 bg-white/20 backdrop-blur-md text-white rounded-2xl">
-        About Dziths Chess Coach
+        Chess Course
       </h2>
       <div
         id="course"
@@ -25,11 +26,7 @@ function Course() {
               melangkah lebih jauh.
             </p>
           </div>
-          <img
-            src={course}
-            alt="Course"
-            className="h-full w-full rounded-2xl object-cover"
-          />
+          <RollingGallery autoplay={true} pauseOnHover={true} />
         </div>
 
         {/* Grid Konten */}

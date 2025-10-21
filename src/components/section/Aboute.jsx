@@ -1,11 +1,10 @@
 import profile from "../../assets/chess-player.jpg";
+import profile1 from "../../assets/chess-player1.jpg";
+import profile2 from "../../assets/chess-player2.jpg";
+import profile3 from "../../assets/chess-player3.jpg";
 import coursebg from "../../assets/chess-bg3.jpg";
 
 function Aboute() {
-  const handleNavigateToAbout = () => {
-    window.location.pathname = "/about";
-  };
-
   return (
     <div id="about" className=" text-white m-5 rounded-xl overflow-hidden">
       <h2 className=" mb-5 text-center text-3xl font-bold uppercase p-3 bg-white/20 backdrop-blur-md">
@@ -15,15 +14,39 @@ function Aboute() {
         className="p-5 grid grid-cols-1 md:grid-cols-2 gap-2"
         style={{ backgroundImage: `url(${coursebg})` }}
       >
-        <div className="h-96 bg-white/30 backdro p-blur-sm rounded-xl overflow-hidden">
-          <img
-            src={profile}
-            alt="profile"
-            className="w-full h-full object-cover object-top"
-          />
+        <div className="grid grid-cols-2 gap-2">
+          <div className="h-56 bg-white/30 backdro p-blur-sm rounded-xl overflow-hidden grid">
+            <img
+              src={profile}
+              alt="profile"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+          <div className="h-56 bg-white/30 backdro p-blur-sm rounded-xl overflow-hidden grid">
+            <img
+              src={profile1}
+              alt="profile"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+          <div className="h-56 bg-white/30 backdro p-blur-sm rounded-xl overflow-hidden grid">
+            <img
+              src={profile2}
+              alt="profile"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+          <div className="h-56 bg-white/30 backdro p-blur-sm rounded-xl overflow-hidden grid">
+            <img
+              src={profile3}
+              alt="profile"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
         </div>
+
         <div className="bg-[#393E46]/30 backdrop-blur-sm shadow-md p-4 rounded-xl ">
-          <p className="text-sm text-justify mt-10">
+          <p className=" text-justify mt-5">
             Dziththauly Ramadhan (CM), lahir di Surabaya pada tahun 2002 dan
             menekuni dunia catur sejak usia muda. Banyak prestasi yang sudah
             saya peroleh di dalam dunia catur dan prestasi yang saya raih dalam

@@ -10,6 +10,7 @@ import {
   Heart,
 } from "lucide-react";
 import useCartStore from "../../store/cartStore";
+import logo from "../../assets/logo1.png";
 
 const ModernNav = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -98,9 +99,12 @@ const ModernNav = () => {
             <div className="flex-shrink-0">
               <a
                 href="/"
-                className="text-2xl font-bold text-white hover:text-red-400 transition-colors duration-300"
+                className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-300"
               >
-                Dizhts Chess
+                <img src={logo} alt="Dziths Chess" className="h-10 w-auto" />
+                <span className="text-xl font-bold text-white hidden sm:block">
+                  Dziths Chess
+                </span>
               </a>
             </div>
 
