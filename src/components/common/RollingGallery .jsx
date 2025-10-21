@@ -33,8 +33,8 @@ const RollingGallery = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Mengurangi jumlah gambar menjadi 4 saja
-  const displayedImages = images.slice(0, 6);
+  // Responsive image count: 5 for mobile, 6 for desktop
+  const displayedImages = images.slice(0, isScreenSizeSm ? 5 : 6);
 
   // Memperbesar ukuran silinder dan jarak
   const cylinderWidth = isScreenSizeSm ? 1200 : 1800;
