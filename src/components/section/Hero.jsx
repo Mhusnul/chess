@@ -9,12 +9,14 @@ function Hero() {
   return (
     <div
       id="home"
-      className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white pt-14 sm:pt-16"
+      className="relative hero min-h-screen max-w-screen overflow-x-hidden text-white"
       style={{
         backgroundImage: `url(${board})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <div style={{ width: "100%", height: "600px", position: "relative" }}>
+      <div className="absolute inset-0 w-full h-full z-10">
         <LightRays
           raysOrigin="top-center"
           raysColor="#00ffff"
@@ -30,13 +32,13 @@ function Hero() {
       </div>
 
       {/* Bawah Tengah */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 text-center max-w-screen">
-        <p className="italic mb-4 text-xl">
+      <div className="absolute left-1/2 transform -translate-x-1/2 z-20 text-center max-w-screen top-1/2 -translate-y-1/2 px-4">
+        <p className="italic mb-4 text-lg sm:text-xl">
           Welcome to the Brain Chess Factory
         </p>
         <SplitText
           text="Dziths Chess Course"
-          className="text-2xl md:text-6xl font-semibold text-center"
+          className="text-2xl sm:text-4xl md:text-6xl font-semibold text-center"
           delay={100}
           duration={0.6}
           ease="power3.out"
@@ -49,8 +51,12 @@ function Hero() {
           onLetterAnimationComplete={handleAnimationComplete}
         />
         <div className="w-full h-1 bg-white mx-auto my-4"></div>
-        <p className="mt-4">Take a look and be more stronger chess player!</p>
-        <p>"Where Every Thought is a Checkmate"</p>
+        <p className="mt-4 text-sm sm:text-base">
+          Take a look and be more stronger chess player!
+        </p>
+        <p className="text-sm sm:text-base">
+          "Where Every Thought is a Checkmate"
+        </p>
       </div>
     </div>
   );
