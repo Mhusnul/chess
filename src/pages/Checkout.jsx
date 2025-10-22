@@ -116,34 +116,25 @@ const Checkout = () => {
           `Terima kasih!`
       );
 
-      // Buka WhatsApp dengan deteksi device dan fallback
-      const whatsappNumber = "6285337735757"; // Nomor WA bisnis yang baru
+      // Kembali ke approach sederhana - langsung ke WhatsApp
+      const whatsappNumber = "6285337735757";
 
-      // Deteksi apakah user menggunakan mobile device
-      const isMobile =
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        );
+      // Buat pesan ringkas
+      const shortMessage = encodeURIComponent(
+        `*PESANAN BARU*\n\n` +
+          `Order ID: ${orderId}\n` +
+          `Nama: ${customerData.name}\n` +
+          `HP: ${customerData.phone}\n` +
+          `Total: Rp ${getTotalPrice().toLocaleString("id-ID")}\n\n` +
+          `Bukti pembayaran sudah dikirim.\n` +
+          `Terima kasih!`
+      );
 
-      if (isMobile) {
-        // Untuk mobile, coba buka aplikasi langsung dengan URL scheme
-        const mobileUrl = `whatsapp://send?phone=${whatsappNumber}&text=${message}`;
-        const webUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
-
-        // Coba buka aplikasi, jika gagal fallback ke web
-        window.location.href = mobileUrl;
-
-        // Fallback ke web setelah delay singkat jika aplikasi tidak terbuka
-        setTimeout(() => {
-          window.open(webUrl, "_blank");
-        }, 1000);
-      } else {
-        // Untuk desktop, langsung ke WhatsApp Web
-        window.open(
-          `https://wa.me/${whatsappNumber}?text=${message}`,
-          "_blank"
-        );
-      } // Clear cart dan pindah ke success
+      // Langsung buka WhatsApp untuk semua device
+      window.open(
+        `https://wa.me/${whatsappNumber}?text=${shortMessage}`,
+        "_blank"
+      ); // Clear cart dan pindah ke success
       clearCart();
       setCurrentStep(3);
     } catch (error) {
@@ -525,7 +516,8 @@ const Checkout = () => {
                       htmlFor="payment-proof"
                       className="block text-sm font-medium mb-2 text-white"
                     >
-                      Upload Bukti Pembayaran *
+                      Upload Bukti Pembayaran Mohon sertakan bukti pembayaran
+                      ketika konfirmasi di WhatsApp *
                     </label>
                     <input
                       type="file"

@@ -103,12 +103,13 @@ function Community() {
       : "bg-yellow-500/90 text-black";
   };
 
-  // Handle link click
+  // Handle link click - langsung buka semua link
   const handleLinkClick = (link, type) => {
     if (link === "#") {
       alert("Coming Soon! Fitur ini akan segera hadir.");
       return;
     }
+    // Langsung buka semua link termasuk WhatsApp
     window.open(link, "_blank");
   };
 
@@ -254,9 +255,9 @@ function Community() {
               bergabung, jangan ragu untuk menghubungi kami.
             </p>
             <button
-              onClick={() =>
-                window.open("https://wa.me/6285337735757", "_blank")
-              }
+              onClick={() => {
+                window.open("https://wa.me/6285337735757", "_blank");
+              }}
               className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 mx-auto"
             >
               <MessageCircle className="w-5 h-5" />
