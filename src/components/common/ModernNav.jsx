@@ -8,6 +8,7 @@ import {
   BookOpen,
   MessageSquare,
   Heart,
+  GraduationCap,
 } from "lucide-react";
 import useCartStore from "../../store/cartStore";
 import logo from "../../assets/logo1.png";
@@ -40,12 +41,17 @@ const ModernNav = () => {
     {
       label: "Kelas",
       href: "/class",
-      icon: Users,
+      icon: GraduationCap,
     },
     {
       label: "Book",
       href: "/book",
       icon: BookOpen,
+    },
+    {
+      label: "Komunitas",
+      href: "/community",
+      icon: Users,
     },
     {
       label: "Contact",

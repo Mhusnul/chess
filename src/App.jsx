@@ -3,6 +3,7 @@ import Class from "./pages/Class";
 import Book from "./pages/Book";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
+import Community from "./pages/Community";
 import WhatsAppFloat from "./components/common/WhatsAppFloat";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -20,6 +21,8 @@ function App() {
         <Checkout />
       ) : currentPath === "/contact" || currentPath === "/kontak" ? (
         <Contact />
+      ) : currentPath === "/community" || currentPath === "/komunitas" ? (
+        <Community />
       ) : (
         <Home />
       )}
