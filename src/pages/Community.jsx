@@ -35,7 +35,7 @@ function Community() {
     },
     {
       id: 2,
-      title: "brosur turnamen catur",
+      title: "Brosur Turnamen Catur",
       description:
         "Ikuti saluran WhatsApp kami untuk mendapatkan update terbaru, tips catur harian, dan informasi event terkini.",
       icon: MessageCircle,
@@ -64,7 +64,7 @@ function Community() {
     },
     {
       id: 4,
-      title: "chess comunity by whatsapp",
+      title: "Chess Community by WhatsApp",
       description:
         "Dapatkan berita catur terkini, analisis pertandingan GM, dan update dunia catur internasional langsung di WhatsApp.",
       icon: Newspaper,
