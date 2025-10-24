@@ -26,7 +26,7 @@ function Content() {
       description:
         "Panduan lengkap strategi catur dalam format digital yang bisa diakses kapan saja",
       type: "Digital Book",
-      count: "12 E-Books",
+      count: "50+ E-Books",
     },
     {
       icon: <Video size={32} />,
@@ -39,14 +39,14 @@ function Content() {
   ];
 
   return (
-    <div id="content" className="text-white p-5 mt-5 ">
+    <div id="content" className="text-white m-5 ">
       {/* Main Content Grid */}
       <div
         style={{
           backgroundImage: `url(${coursebg})`,
           backgroundSize: "cover",
         }}
-        className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto rounded-2xl"
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-auto rounded-2xl"
       >
         {/* Featured Video Section */}
         <div className="lg:col-span-2">
@@ -83,15 +83,19 @@ function Content() {
               className="bg-white/20 backdrop-blur-md rounded-xl p-5 hover:bg-white/30 transition-all duration-300 text-black"
             >
               <div className="flex items-start gap-4">
-                <div className=" flex-shrink-0">{item.icon}</div>
+                <div className=" flex-shrink-0 text-yellow-400">
+                  {item.icon}
+                </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
+                  <h4 className="font-semibold text-lg mb-2 text-yellow-400">
+                    {item.title}
+                  </h4>
                   <p className=" text-sm mb-3">{item.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs bg-gray-600/20 text-gray-300 px-2 py-1 rounded-full">
+                    <span className="text-xs bg-yellow-400 px-2 py-1 rounded-full">
                       {item.type}
                     </span>
-                    <span className="text-xs text-gray-400 font-medium">
+                    <span className="text-xs text-yellow-400 font-medium">
                       {item.count}
                     </span>
                   </div>

@@ -6,9 +6,13 @@ import RollingGallery from "../common/RollingGallery ";
 function Course() {
   return (
     <>
-      <h2 className=" m-5 text-center text-3xl font-bold uppercase p-3 bg-white/20 backdrop-blur-md text-white rounded-2xl">
-        Chess Course
-      </h2>
+      <div className="flex items-center gap-4">
+        <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-yellow-400 to-yellow-400 rounded-full"></div>
+        <h2 className="text-3xl md:text-4xl font-bold uppercase text-white whitespace-nowrap">
+          <span className="text-yellow-400">Chess Course</span>
+        </h2>
+        <div className="h-1 flex-1 bg-gradient-to-l from-transparent via-yellow-400 to-yellow-400 rounded-full"></div>
+      </div>
       <div
         id="course"
         style={{ backgroundImage: `url(${coursebg})`, backgroundSize: "cover" }}
@@ -17,8 +21,9 @@ function Course() {
         {/* Side Intro */}
         <div className="h-full flex flex-col justify-between gap-4">
           <div>
-            <h3 className="font-bold text-3xl mb-4">
-              Jadikan Papan Catur Panggung Kemenanganmu!
+            <h3 className="font-bold text-3xl mb-4 ">
+              Jadikan Papan Catur
+              <span className="text-yellow-400"> Panggung Kemenanganmu! </span>
             </h3>
             <p className="font-light text-lg">
               Improve strategi permainan catur menjadi lebih baik dan lebih
@@ -33,7 +38,11 @@ function Course() {
         <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1 */}
           <div className="bg-black/30 backdrop-blur-md p-6 rounded-xl shadow-md">
-            <BrickWallFire strokeWidth={0.75} size={40} className="mb-4" />
+            <BrickWallFire
+              strokeWidth={0.75}
+              size={40}
+              className="mb-4 text-yellow-400"
+            />
 
             <h4 className="font-bold text-xl mb-2">Materi Lengkap</h4>
             <p className="text-sm text-gray-200">
@@ -45,7 +54,11 @@ function Course() {
 
           {/* Card 2 */}
           <div className="text-black bg-white/30 backdrop-blur-md p-6 rounded-xl">
-            <CalendarSync strokeWidth={0.75} size={40} className="mb-4" />
+            <CalendarSync
+              strokeWidth={0.75}
+              size={40}
+              className="mb-4 text-yellow-400"
+            />
             <h4 className="font-bold text-xl mb-2">Pendekatan Terarah</h4>
             <p className="text-sm">
               Setiap sesi dirancang dengan tujuan pembelajaran yang jelas agar
@@ -55,7 +68,11 @@ function Course() {
 
           {/* Card 3 */}
           <div className="text-black bg-white/30 backdrop-blur-md p-6 rounded-xl">
-            <Atom strokeWidth={0.75} size={40} className="mb-4" />
+            <Atom
+              strokeWidth={0.75}
+              size={40}
+              className="mb-4 text-yellow-400"
+            />
             <h4 className="font-bold text-xl mb-2">Sparing</h4>
             <p className="text-sm">
               Bermain dengan pemain dan pelatih profesional untuk meningkatkan
@@ -65,7 +82,11 @@ function Course() {
 
           {/* Card 4 */}
           <div className="bg-black/30 backdrop-blur-md p-6 rounded-xl">
-            <SmilePlus strokeWidth={0.75} size={40} className="mb-4" />
+            <SmilePlus
+              strokeWidth={0.75}
+              size={40}
+              className="mb-4 text-yellow-400"
+            />
             <h4 className="font-bold text-xl mb-2">Bimbingan Langsung</h4>
             <p className="text-sm text-gray-200">
               Dapatkan feedback langsung dari pelatih profesional untuk
@@ -77,7 +98,7 @@ function Course() {
           <div className="col-span-1 md:col-span-2 flex justify-center mt-6">
             <button
               onClick={() => (window.location.href = "/class")}
-              className="w-full bg-white font-bold text-lg md:text-2xl uppercase px-4 py-3 min-h-[48px] rounded-2xl font-serif text-black hover:bg-red-600 hover:text-white transition-all duration-300 whitespace-normal leading-tight"
+              className="w-full bg-white font-bold text-lg md:text-2xl uppercase px-4 py-3 min-h-[48px] rounded-2xl font-serif text-black hover:bg-yellow-400 hover:text-white transition-all duration-300 whitespace-normal leading-tight"
             >
               Bergabung Sekarang
             </button>
