@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useCartStore from "../store/cartStore";
 import bookBg from "../assets/book-bg.jpg";
 import courseBg from "../assets/course-bg.jpg";
+import qrisImg from "../assets/qris.jpg";
 import ModernNav from "../components/common/ModernNav";
 import Footer from "../components/layout/Footer";
 import { Plus, Minus, Trash2 } from "lucide-react";
@@ -494,16 +495,19 @@ const Checkout = () => {
 
                   {/* QRIS Payment */}
                   <div className="text-center mb-6">
-                    <div className="bg-white p-4 rounded-lg inline-block mb-4">
-                      {/* QR Code Placeholder - Replace with actual QR code */}
-                      <div className="w-48 h-48 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-                        QR CODE QRIS
-                        <br />
-                        (Tambahkan QR Code disini)
-                      </div>
+                    <div className="rounded-lg inline-block mb-4 shadow-lg">
+                      {/* QRIS Image */}
+                      <img
+                        src={qrisImg}
+                        alt="QRIS Payment"
+                        className="w-48 h-48 object-contain rounded"
+                      />
                     </div>
                     <p className="text-white/80 mb-2">
-                      Scan QR Code untuk pembayaran
+                      Scan QR Code untuk pembayaran via QRIS
+                    </p>
+                    <p className="text-white/60 text-sm mb-3">
+                      Bisa menggunakan semua aplikasi bank & e-wallet
                     </p>
                     <p className="text-yellow-400 font-bold text-xl">
                       Total: {formatPrice(getTotalPrice())}
@@ -562,7 +566,7 @@ const Checkout = () => {
                       alt={item.title}
                       className="w-16 h-20 object-cover rounded mx-auto sm:mx-0 shrink-0"
                     />
-                    <div className="flex-1 w-full">
+                    <div className="flex-1 w-full ml-5">
                       <h3 className="font-medium text-white text-center sm:text-left">
                         {item.title}
                       </h3>
