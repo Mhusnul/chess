@@ -10,7 +10,7 @@ function About() {
     <div id="about" className="text-white m-5 rounded-xl overflow-hidden">
       <div className="mb-8 flex items-center gap-4">
         <div className="h-1 flex-1 bg-gradient-to-r from-transparent via-yellow-400 to-yellow-400 rounded-full"></div>
-        <h2 className="text-3xl md:text-4xl font-bold uppercase text-white">
+        <h2 className="text-2xl md:text-4xl font-bold uppercase text-white text-center">
           About <span className="text-yellow-400">Dziths Chess Coach</span>
         </h2>
         <div className="h-1 flex-1 bg-gradient-to-l from-transparent via-yellow-400 to-yellow-400 rounded-full"></div>
