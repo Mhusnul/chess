@@ -25,7 +25,7 @@ function Community() {
       link: "https://www.chess.com/club/dziths-chess-1",
       type: "chess-club",
       status: "Active",
-      members: "50+ Members",
+      members: "100+ Members",
       features: [
         "Turnamen Rutin",
         "Diskusi Strategi",
@@ -51,10 +51,10 @@ function Community() {
       description:
         "Komunitas Discord untuk diskusi real-time, voice chat saat bermain, dan berbagi pengalaman dengan sesama pecinta catur.",
       icon: MessageCircle,
-      link: "#",
+      link: "https://discord.com/invite/fed7eKwMvv",
       type: "discord",
-      status: "Coming Soon",
-      members: "Soon",
+      status: "Active",
+      members: "100+",
       features: [
         "Voice Chat",
         "Real-time Discussion",
