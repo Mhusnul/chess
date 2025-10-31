@@ -42,6 +42,12 @@ const useGoogleSheetsBooks = () => {
     }
   };
 
+  // Enable debug logs only in development builds
+  const DEBUG =
+    typeof process !== "undefined" &&
+    process.env &&
+    process.env.NODE_ENV === "development";
+
   const parseCSVLine = (line) => {
     const values = [];
     let value = "";
@@ -90,9 +96,11 @@ const useGoogleSheetsBooks = () => {
     }
 
     const parsed = parseFloat(cleanedPrice) || 0;
-    console.log(
-      `💰 Price parsing: "${price}" -> "${cleanedPrice}" -> ${parsed}`
-    );
+    if (DEBUG) {
+      console.log(
+        `💰 Price parsing: "${price}" -> "${cleanedPrice}" -> ${parsed}`
+      );
+    }
     return Math.round(parsed); // Return as integer
   };
 
@@ -100,7 +108,7 @@ const useGoogleSheetsBooks = () => {
     const fetchBooks = async () => {
       try {
         setLoading(true);
-        console.log("🔄 Fetching books data...");
+        if (DEBUG) console.log("🔄 Fetching books data...");
 
         const response = await fetch(SPREADSHEET_URL);
         if (!response.ok) {
@@ -150,7 +158,7 @@ const useGoogleSheetsBooks = () => {
         setBooks(booksData);
         setError(null);
       } catch (err) {
-        console.error("❌ Error fetching books:", err);
+        if (DEBUG) console.error("❌ Error fetching books:", err);
         setError("Gagal memuat data buku: " + err.message);
         setBooks([]);
       } finally {

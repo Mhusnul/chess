@@ -16,6 +16,7 @@ import {
   ChevronUp,
   ChevronLeft,
   ChevronRight,
+  Filter,
 } from "lucide-react";
 
 import bookBg from "../assets/book-bg.jpg";
@@ -26,6 +27,7 @@ function Book() {
   const [searchTerm, setSearchTerm] = useState("");
   const [imageErrors, setImageErrors] = useState({});
   const [expandedCards, setExpandedCards] = useState(new Set());
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,11 +68,19 @@ function Book() {
 
   useEffect(() => {
     if (!sheetsBooks) return;
-
     let filtered = sheetsBooks;
+
+    // Apply category filter first
+    if (selectedCategory && selectedCategory !== "All") {
+      filtered = filtered.filter(
+        (book) => (book.category || "").toString() === selectedCategory
+      );
+    }
+
+    // Then apply search term over the currently filtered set
     if (searchTerm) {
-      filtered = sheetsBooks.filter((book) => {
-        const searchLower = searchTerm.toLowerCase();
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter((book) => {
         return (
           (book.title && book.title.toLowerCase().includes(searchLower)) ||
           (book.deskripsi &&
@@ -80,8 +90,18 @@ function Book() {
         );
       });
     }
+
     setFilteredBooks(filtered);
-  }, [searchTerm, sheetsBooks]);
+  }, [searchTerm, sheetsBooks, selectedCategory]);
+
+  // Compute categories from sheetsBooks
+  const categories = React.useMemo(() => {
+    if (!sheetsBooks) return ["All"];
+    const unique = Array.from(
+      new Set(sheetsBooks.map((b) => (b.category || "").toString()))
+    ).filter((c) => c && c !== "");
+    return ["All", ...unique];
+  }, [sheetsBooks]);
 
   const handleAddToCart = (book) => {
     const price = parseInt(book.price) || 0;
@@ -208,6 +228,42 @@ function Book() {
               </span>{" "}
               buku
             </p>
+          </div>
+          {/* Category Filter (same design as Class page) */}
+          <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 sm:p-6 my-6 border border-white/20">
+            <div className="flex items-center gap-2 mb-4">
+              <Filter className="w-4 h-4 text-red-500" />
+              <h3 className="text-lg font-semibold text-white">
+                Filter Kategori
+              </h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setCurrentPage(1);
+                  }}
+                  className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
+                    selectedCategory === category
+                      ? "bg-red-600 text-white"
+                      : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                  } border border-white/20`}
+                >
+                  {category}
+                  <span className="ml-1 text-xs opacity-75">
+                    {category === "All"
+                      ? `(${sheetsBooks.length})`
+                      : `(${
+                          sheetsBooks.filter(
+                            (b) => (b.category || "").toString() === category
+                          ).length
+                        })`}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
