@@ -117,8 +117,8 @@ const Checkout = () => {
           `Terima kasih!`
       );
 
-      // Kembali ke approach sederhana - langsung ke WhatsApp
-      const whatsappNumber = "6285337735757";
+      // Kembali ke approach sederhana - langsung ke WhatsApp (nomor baru)
+      const whatsappNumber = "6282340875540";
 
       // Buat pesan ringkas
       const shortMessage = encodeURIComponent(

@@ -84,7 +84,7 @@ function Contact() {
           `Pesan:\n${formData.message}`
       );
 
-      const whatsappNumber = "6285337735757";
+      const whatsappNumber = "6282340875540";
       const isMobile =
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent
@@ -205,7 +205,15 @@ function Contact() {
                         Telepon
                       </h3>
                       <p className="text-gray-300">
-                        +62 853 3773 5757 (WhatsApp)
+                        <a
+                          href="https://wa.me/6282340875540"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-yellow-400"
+                        >
+                          Message Dziths Chess on WhatsApp.
+                          https://wa.me/6282340875540
+                        </a>
                       </p>
                     </div>
                   </div>

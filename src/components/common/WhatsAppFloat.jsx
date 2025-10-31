@@ -4,10 +4,10 @@ import { MessageCircle } from "lucide-react";
 const WhatsAppFloat = () => {
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(
-      "Halo! Saya ingin bertanya tentang kelas catur dan buku yang tersedia."
+      "Message Dziths Chess on WhatsApp. https://wa.me/6282340875540"
     );
 
-    const whatsappNumber = "6285337735757";
+    const whatsappNumber = "6282340875540";
     const isMobile =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent

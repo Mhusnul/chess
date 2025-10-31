@@ -54,7 +54,7 @@ function Community() {
       link: "https://discord.com/invite/fed7eKwMvv",
       type: "discord",
       status: "Active",
-      members: "100+",
+      members: "100+ Members",
       features: [
         "Voice Chat",
         "Real-time Discussion",
@@ -68,10 +68,10 @@ function Community() {
       description:
         "Dapatkan berita catur terkini, analisis pertandingan GM, dan update dunia catur internasional langsung di WhatsApp.",
       icon: Newspaper,
-      link: "#",
+      link: "https://chat.whatsapp.com/ELt7stewaMbHiFiYnShwB6?mode=wwt",
       type: "whatsapp-news",
-      status: "Coming Soon",
-      members: "Soon",
+      status: "Active",
+      members: "100+ Members",
       features: [
         "Berita Harian",
         "Analisis GM",
@@ -256,7 +256,7 @@ function Community() {
             </p>
             <button
               onClick={() => {
-                window.open("https://wa.me/6285337735757", "_blank");
+                window.open("https://wa.me/6282340875540", "_blank");
               }}
               className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 mx-auto"
             >

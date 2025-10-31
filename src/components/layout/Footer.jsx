@@ -129,7 +129,15 @@ function Footer() {
             <MapPin size={16} /> Jakarta
           </div>
           <div className="flex items-center gap-2 mb-2 md:mb-0">
-            <Phone size={16} /> +62 853 3773 5757
+            <Phone size={16} />
+            <a
+              href="https://wa.me/6282340875540"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-400"
+            >
+              Message Dziths Chess on WhatsApp. https://wa.me/6282340875540
+            </a>
           </div>
           <div className="flex items-center gap-2">
             <Mail size={16} /> dziththaulyramadhan@gmail.com
