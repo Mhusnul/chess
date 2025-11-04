@@ -39,7 +39,7 @@ function Community() {
       description:
         "Ikuti saluran WhatsApp kami untuk mendapatkan update terbaru, tips catur harian, dan informasi event terkini.",
       icon: MessageCircle,
-      link: "https://whatsapp.com/channel/0029VbAL9SMJ93wX9FPAFR2R",
+      link: "https://chat.whatsapp.com/EjG3zYXKGO8Haw6YZWOGcy?mode=wwt",
       type: "whatsapp-channel",
       status: "Active",
       members: "100+ Subscribers",
