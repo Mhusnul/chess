@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Community from "./pages/Community";
 import WhatsAppFloat from "./components/common/WhatsAppFloat";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   // Simple routing based on URL path
@@ -30,6 +31,7 @@ function App() {
       {/* WhatsApp Float Button - appears on all pages */}
       <WhatsAppFloat />
       <SpeedInsights />
+      <Analytics />
     </>
   );
 }
