@@ -74,7 +74,7 @@ function Class() {
       title: course.title,
       price: course.price,
       img: coursebg,
-      author: "Muhammad Husnul",
+      author: "Chess Academy",
       category: "Course",
       type: "course",
     };
