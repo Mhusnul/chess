@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useCartStore from "../store/cartStore";
 import bookBg from "../assets/book-bg.jpg";
 import courseBg from "../assets/course-bg.jpg";
-import qrisImg from "../assets/qris.jpg";
+import qrisImg from "../assets/qris.jpeg";
 import ModernNav from "../components/common/ModernNav";
 import Footer from "../components/layout/Footer";
 import { Plus, Minus, Trash2 } from "lucide-react";
@@ -90,7 +90,7 @@ const Checkout = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(orderData),
-        }
+        },
       );
 
       // Buat pesan WhatsApp
@@ -99,7 +99,7 @@ const Checkout = () => {
           (item, index) =>
             `${index + 1}. ${item.title} - ${item.quantity}x - Rp ${(
               item.price * item.quantity
-            ).toLocaleString("id-ID")}`
+            ).toLocaleString("id-ID")}`,
         )
         .join("\n");
 
@@ -114,7 +114,7 @@ const Checkout = () => {
           `*Total: Rp ${getTotalPrice().toLocaleString("id-ID")}*\n\n` +
           `Bukti pembayaran sudah dikirim.\n` +
           (customerData.notes ? `Catatan: ${customerData.notes}\n\n` : "") +
-          `Terima kasih!`
+          `Terima kasih!`,
       );
 
       // Kembali ke approach sederhana - langsung ke WhatsApp (nomor baru)
@@ -128,13 +128,13 @@ const Checkout = () => {
           `HP: ${customerData.phone}\n` +
           `Total: Rp ${getTotalPrice().toLocaleString("id-ID")}\n\n` +
           `Bukti pembayaran sudah dikirim.\n` +
-          `Terima kasih!`
+          `Terima kasih!`,
       );
 
       // Langsung buka WhatsApp untuk semua device
       window.open(
         `https://wa.me/${whatsappNumber}?text=${shortMessage}`,
-        "_blank"
+        "_blank",
       ); // Clear cart dan pindah ke success
       clearCart();
       setCurrentStep(3);
