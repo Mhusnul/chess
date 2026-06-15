@@ -88,7 +88,7 @@ function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-red-400 transition-colors"
                 >
-                  <Trophy size={16} /> Donasi (Saweria)
+                  <Trophy size={16} /> Donasikan (Saweria)
                 </a>
               </li>
             </ul>

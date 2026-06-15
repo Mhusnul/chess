@@ -1,4 +1,14 @@
-import { Award, Trophy, Target, Zap } from "lucide-react";
+import {
+  Award,
+  Trophy,
+  Target,
+  Zap,
+  Youtube,
+  Instagram,
+  Twitch,
+  Heart,
+  Video,
+} from "lucide-react";
 import profile from "../../assets/chess-player.jpg";
 import profile1 from "../../assets/chess-player1.jpg";
 import profile2 from "../../assets/chess-player2.jpg";
@@ -92,6 +102,38 @@ function About() {
                 Jateng 2025, saya berhasil menyapu bersih tiga medali emas di
                 nomor kilat, cepat, dan klasik beregu.
               </p>
+
+              {/* Social Media Buttons */}
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent my-4"></div>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href="https://www.youtube.com/@dzithschess"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-red-600 hover:bg-red-700 transition-colors px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-white no-underline text-sm"
+                >
+                  <Youtube size={16} />
+                  <span>YouTube</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/dzithschess"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-colors px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-white no-underline text-sm"
+                >
+                  <Instagram size={16} />
+                  <span>@dzithschess</span>
+                </a>
+                <a
+                  href="https://saweria.co/dzithschess"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 transition-colors px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-white no-underline text-sm"
+                >
+                  <Heart size={16} />
+                  <span>Saweria</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

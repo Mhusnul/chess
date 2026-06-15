@@ -6,6 +6,7 @@ import {
   Video,
   Camera,
   Twitch,
+  Heart,
 } from "lucide-react";
 import coursebg from "../../assets/chess-bg.jpg";
 import contentBg from "../../assets/chess-bg2.jpg";
@@ -124,7 +125,7 @@ function Content() {
             update dari dunia catur professional. Bergabunglah dengan komunitas
             pecinta catur yang terus berkembang di berbagai platform.
           </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center">
             <a
               href="https://www.youtube.com/@dzithschess"
               target="_blank"
@@ -135,13 +136,13 @@ function Content() {
               <span className="hidden sm:inline">YouTube</span>
             </a>
             <a
-              href="https://www.instagram.com/dziths_?igsh=bzl6bWJkdnp3dTJm"
+              href="https://www.instagram.com/dzithschess"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-colors px-4 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 text-white no-underline"
             >
               <Instagram size={20} />
-              <span className="hidden sm:inline">Instagram</span>
+              <span className="hidden sm:inline">@dzithschess</span>
             </a>
             <a
               href="https://www.twitch.tv/cmdziths"
@@ -160,6 +161,15 @@ function Content() {
             >
               <Video size={20} />
               <span className="hidden sm:inline">TikTok</span>
+            </a>
+            <a
+              href="https://saweria.co/dzithschess"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 transition-colors px-4 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 text-white no-underline"
+            >
+              <Heart size={20} />
+              <span className="hidden sm:inline">Saweria</span>
             </a>
           </div>
         </div>

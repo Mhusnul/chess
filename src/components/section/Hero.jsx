@@ -1,7 +1,7 @@
 import board from "../../assets/pion-board.jpg";
 import LightRays from "../common/LightRays";
 import SplitText from "../common/SplitText";
-import { Trophy, Target, Zap } from "lucide-react";
+import { Trophy, Target, Zap, Heart } from "lucide-react";
 
 function Hero() {
   const handleAnimationComplete = () => {
@@ -12,14 +12,23 @@ function Hero() {
     {
       icon: <Trophy className="w-5 h-5" />,
       text: "Professional Coach",
+      isHighlight: false,
     },
     {
       icon: <Target className="w-5 h-5" />,
       text: "Proven Methods",
+      isHighlight: false,
     },
     {
       icon: <Zap className="w-5 h-5" />,
       text: "Fast Results",
+      isHighlight: false,
+    },
+    {
+      icon: <Heart className="w-5 h-5" />,
+      text: "Support Us - Saweria",
+      link: "https://saweria.co/dzithschess",
+      isHighlight: true,
     },
   ];
 
@@ -80,15 +89,30 @@ function Hero() {
 
         {/* Feature Badges - Tambahan */}
         <div className="flex flex-wrap justify-center gap-3 mt-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-black/40 backdrop-blur-md border border-white/30 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-black/60 hover:border-yellow-400/50 transition-all duration-300 hover:transform hover:scale-105"
-            >
-              <div className="text-yellow-400">{feature.icon}</div>
-              <span className="text-sm font-semibold">{feature.text}</span>
-            </div>
-          ))}
+          {features.map((feature, index) =>
+            feature.isHighlight ? (
+              <a
+                key={index}
+                href={feature.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 backdrop-blur-md border border-pink-400/50 rounded-full px-4 py-2 flex items-center gap-2 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-pink-500/50"
+              >
+                <div className="text-white animate-pulse">{feature.icon}</div>
+                <span className="text-sm font-bold text-white">
+                  {feature.text}
+                </span>
+              </a>
+            ) : (
+              <div
+                key={index}
+                className="bg-black/40 backdrop-blur-md border border-white/30 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-black/60 hover:border-yellow-400/50 transition-all duration-300 hover:transform hover:scale-105"
+              >
+                <div className="text-yellow-400">{feature.icon}</div>
+                <span className="text-sm font-semibold">{feature.text}</span>
+              </div>
+            ),
+          )}
         </div>
       </div>
     </div>

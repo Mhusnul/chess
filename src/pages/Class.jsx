@@ -17,6 +17,10 @@ import {
   ChevronDown,
   ChevronUp,
   Sparkles,
+  Crown,
+  Zap,
+  Target,
+  BookOpen,
 } from "lucide-react";
 import coursebg from "../assets/course-bg.jpg";
 import chessBg3 from "../assets/chess-bg3.jpg";
@@ -26,8 +30,69 @@ function Class() {
   const { courses, loading, error, refetch } = useCourseData();
   const { addToCart } = useCartStore();
   const { showToast, ToastComponent } = useToast();
+
+  const [selectedClassType, setSelectedClassType] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [expandedCards, setExpandedCards] = useState(new Set());
+
+  // Define class types with their corresponding filter categories
+  const classTypes = [
+    {
+      id: "beginner",
+      name: "Beginner Class",
+      title: "Kelas Pemula",
+      description: "Untuk pemula yang baru memulai perjalanan catur mereka",
+      icon: BookOpen,
+      color: "from-blue-600 to-blue-700",
+      borderColor: "border-blue-500",
+      filterCategory: "beginner to intermediate",
+    },
+    {
+      id: "intermediate",
+      name: "Intermediate Class",
+      title: "Kelas Menengah",
+      description: "Untuk pemain dengan pengalaman dasar yang ingin berkembang",
+      icon: Target,
+      color: "from-purple-600 to-purple-700",
+      borderColor: "border-purple-500",
+      filterCategory: "intermediate to advance",
+    },
+    {
+      id: "pro",
+      name: "Pro Class",
+      title: "Kelas Profesional",
+      description:
+        "Untuk pemain kompetitif yang ingin menguasai strategi tingkat lanjut",
+      icon: Zap,
+      color: "from-orange-600 to-orange-700",
+      borderColor: "border-orange-500",
+      filterCategory: "beginner / intermediate / advance",
+    },
+    {
+      id: "exclusive",
+      name: "Exclusive Class",
+      title: "Kelas Eksklusif",
+      description:
+        "Akses premium dengan bimbingan personal dan materi eksklusif",
+      icon: Crown,
+      color: "from-yellow-600 to-yellow-700",
+      borderColor: "border-yellow-500",
+      filterCategory: "beginner / intermediate / advance",
+    },
+  ];
+
+  // Handle class selection
+  const handleSelectClass = (classType) => {
+    setSelectedClassType(classType);
+    // Filter courses by the selected class type's filter category
+    setSelectedCategory(classType.filterCategory);
+    // Scroll to courses section
+    setTimeout(() => {
+      document
+        .querySelector("[data-courses-section]")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
 
   // Existing functionality
   const toggleExpand = (courseId) => {
@@ -99,12 +164,11 @@ function Class() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black"></div>
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight animate-fade-in">
-            Kelas Chess Available
+            Pilih Kelas Chess Anda
           </h1>
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed animate-fade-in-up">
-            Pilih kelas yang sesuai dengan level dan kebutuhanmu. Dari pemula
-            hingga mahir, kami menyediakan berbagai pilihan kelas dengan materi
-            yang komprehensif.
+            Pilih level kelas yang sesuai dengan kemampuan Anda untuk memulai
+            perjalanan pembelajaran catur yang sempurna.
           </p>
         </div>
       </div>
@@ -113,63 +177,61 @@ function Class() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <ToastComponent />
 
-        {/* Category Filter */}
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 sm:p-6 mb-8 border border-white/20">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter className="w-4 h-4 text-red-500" />
-            <h3 className="text-lg font-semibold text-white">
-              Filter Kategori
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
-                  selectedCategory === category
-                    ? "bg-red-600 text-white"
-                    : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
-                } border border-white/20`}
-              >
-                {category}
-                <span className="ml-1 text-xs opacity-75">
-                  {category === "All"
-                    ? `(${courses.length})`
-                    : `(${
-                        courses.filter((c) =>
-                          c.category
-                            .toLowerCase()
-                            .includes(category.toLowerCase())
-                        ).length
-                      })`}
-                </span>
-              </button>
-            ))}
+        {/* Class Selection Grid */}
+        <div className="mb-12">
+          {/* Class Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {classTypes.map((classType) => {
+              const IconComponent = classType.icon;
+              return (
+                <div
+                  key={classType.id}
+                  onClick={() => handleSelectClass(classType)}
+                  className={`group cursor-pointer bg-gradient-to-br ${classType.color} rounded-2xl border-2 ${classType.borderColor} shadow-xl overflow-hidden transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl`}
+                >
+                  {/* Content */}
+                  <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                    {/* Icon */}
+                    <div className="mb-6">
+                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 transform group-hover:scale-110">
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className="flex-1">
+                      <h3 className="text-2xl md:text-xl font-bold text-white mb-2">
+                        {classType.title}
+                      </h3>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                        {classType.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom Section */}
+                    <div className="mt-8 pt-6 border-t border-white/20">
+                      <button className="w-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform group-hover:translate-y-[-2px] flex items-center justify-center gap-2">
+                        <BookOpen className="w-4 h-4" />
+                        Lihat Kelas
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
+        {/* Separator */}
+        <div className="my-12 flex items-center gap-4">
+          <div className="flex-1 h-px bg-gradient-to-r from-white/0 via-white/20 to-white/0"></div>
+          <span className="text-white/60 text-sm">Atau lihat detail kelas</span>
+          <div className="flex-1 h-px bg-gradient-to-r from-white/0 via-white/20 to-white/0"></div>
+        </div>
+
         {/* Course List */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-1">
-                {selectedCategory === "All"
-                  ? "Semua Kelas"
-                  : `Kelas ${selectedCategory}`}
-              </h2>
-              <p className="text-gray-400 text-sm">
-                {filteredCourses.length} kelas tersedia
-              </p>
-            </div>
-            <button
-              onClick={refetch}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2"
-            >
-              <Sparkles className="w-4 h-4" />
-              Refresh
-            </button>
-          </div>
+        <div className="mb-8" data-courses-section>
+          {/* Category Filter */}
 
           {/* Loading State */}
           {loading && (
@@ -317,7 +379,7 @@ function Class() {
             courses.length > 0 &&
             filteredCourses.length === 0 && (
               <div className="text-center py-16">
-                <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 max-w-md mx-auto border border-white/10 shadow-xl">
+                <div className="bg-black/50 backdrop-blur-md rounded-xl p-8 max-w-md mx-auto border border-white/20 shadow-xl">
                   <AlertCircle className="w-16 h-16 mx-auto mb-4 text-red-600" />
                   <h3 className="text-2xl font-bold mb-4 text-white">
                     Tidak Ada Kelas untuk Kategori "{selectedCategory}"
@@ -338,7 +400,7 @@ function Class() {
           {/* Empty State */}
           {!loading && !error && courses.length === 0 && (
             <div className="text-center py-16">
-              <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 max-w-md mx-auto border border-white/10 shadow-xl">
+              <div className="bg-black/50 backdrop-blur-md rounded-xl p-8 max-w-md mx-auto border border-white/20 shadow-xl">
                 <AlertCircle className="w-16 h-16 mx-auto mb-4 text-gray-400" />
                 <h3 className="text-2xl font-bold mb-4 text-white">
                   Tidak Ada Kelas

@@ -81,13 +81,13 @@ function Contact() {
           `Email: ${formData.email}\n` +
           `Telepon: ${formData.phone}\n` +
           `Subjek: ${formData.subject}\n\n` +
-          `Pesan:\n${formData.message}`
+          `Pesan:\n${formData.message}`,
       );
 
       const whatsappNumber = "6282340875540";
       const isMobile =
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
+          navigator.userAgent,
         );
 
       if (isMobile) {
@@ -101,7 +101,7 @@ function Contact() {
       } else {
         window.open(
           `https://wa.me/${whatsappNumber}?text=${waMessage}`,
-          "_blank"
+          "_blank",
         );
       }
 
@@ -187,9 +187,7 @@ function Contact() {
                       <h3 className="text-lg font-semibold text-white mb-1">
                         Email
                       </h3>
-                      <p className="text-gray-300">
-                        dziththaulyramadhan@gmail.com
-                      </p>
+                      <p className="text-gray-300">dzithschess@gmail.com</p>
                     </div>
                   </div>
                 </div>
