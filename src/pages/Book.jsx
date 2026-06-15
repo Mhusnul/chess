@@ -17,6 +17,10 @@ import {
   ChevronLeft,
   ChevronRight,
   Filter,
+  Target,
+  Zap,
+  Crown,
+  Sparkles,
 } from "lucide-react";
 
 import bookBg from "../assets/book-bg.jpg";
@@ -28,6 +32,7 @@ function Book() {
   const [imageErrors, setImageErrors] = useState({});
   const [expandedCards, setExpandedCards] = useState(new Set());
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedBookType, setSelectedBookType] = useState(null);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +40,66 @@ function Book() {
 
   const { addToCart, getItemQuantity } = useCartStore();
   const { showToast, ToastComponent } = useToast();
+
+  // Define book types with their corresponding filter categories
+  const bookTypes = [
+    {
+      id: "beginner",
+      name: "Beginner Books",
+      title: "Buku Pemula",
+      description: "Untuk pemula yang baru memulai perjalanan catur mereka",
+      icon: BookOpen,
+      color: "from-blue-600 to-blue-700",
+      borderColor: "border-blue-500",
+      filterCategory: "Opening",
+    },
+    {
+      id: "intermediate",
+      name: "Intermediate Books",
+      title: "Buku Menengah",
+      description: "Untuk pemain dengan pengalaman dasar yang ingin berkembang",
+      icon: Target,
+      color: "from-purple-600 to-purple-700",
+      borderColor: "border-purple-500",
+      filterCategory: "Middlegame",
+    },
+    {
+      id: "pro",
+      name: "Pro Books",
+      title: "Buku Profesional",
+      description:
+        "Untuk pemain kompetitif yang ingin menguasai strategi tingkat lanjut",
+      icon: Zap,
+      color: "from-orange-600 to-orange-700",
+      borderColor: "border-orange-500",
+      filterCategory: "Endgame",
+    },
+    {
+      id: "exclusive",
+      name: "Exclusive Books",
+      title: "Buku Eksklusif",
+      description:
+        "Akses premium dengan koleksi buku eksklusif dan materi premium",
+      icon: Crown,
+      color: "from-yellow-600 to-yellow-700",
+      borderColor: "border-yellow-500",
+      filterCategory: "All",
+    },
+  ];
+
+  // Handle book type selection
+  const handleSelectBookType = (bookType) => {
+    setSelectedBookType(bookType);
+    // Filter books by the selected book type's filter category
+    setSelectedCategory(bookType.filterCategory);
+    setCurrentPage(1);
+    // Scroll to books section
+    setTimeout(() => {
+      document
+        .querySelector("[data-books-section]")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
 
   // Existing functionality remains the same
   const toggleExpand = (bookId) => {
@@ -73,7 +138,7 @@ function Book() {
     // Apply category filter first
     if (selectedCategory && selectedCategory !== "All") {
       filtered = filtered.filter(
-        (book) => (book.category || "").toString() === selectedCategory
+        (book) => (book.category || "").toString() === selectedCategory,
       );
     }
 
@@ -98,7 +163,7 @@ function Book() {
   const categories = React.useMemo(() => {
     if (!sheetsBooks) return ["All"];
     const unique = Array.from(
-      new Set(sheetsBooks.map((b) => (b.category || "").toString()))
+      new Set(sheetsBooks.map((b) => (b.category || "").toString())),
     ).filter((c) => c && c !== "");
     return ["All", ...unique];
   }, [sheetsBooks]);
@@ -182,20 +247,62 @@ function Book() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12">
         <ToastComponent />
 
-        {/* Back Button */}
-        <button
-          onClick={goBack}
-          className="mb-8 group flex items-center space-x-2 text-white/80 hover:text-white transition-all duration-300"
-        >
-          <ArrowLeft
-            size={20}
-            className="group-hover:-translate-x-1 transition-transform"
-          />
-          <span>Kembali</span>
-        </button>
+        {/* Book Type Selection Grid */}
+        <div className="mb-12">
+          {/* Book Type Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {bookTypes.map((bookType) => {
+              const IconComponent = bookType.icon;
+              return (
+                <div
+                  key={bookType.id}
+                  onClick={() => handleSelectBookType(bookType)}
+                  className={`group cursor-pointer bg-gradient-to-br ${bookType.color} rounded-2xl border-2 ${bookType.borderColor} shadow-xl overflow-hidden transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl`}
+                >
+                  {/* Content */}
+                  <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                    {/* Icon */}
+                    <div className="mb-6">
+                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 transform group-hover:scale-110">
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </div>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className="flex-1">
+                      <h3 className="text-2xl md:text-xl font-bold text-white mb-2">
+                        {bookType.title}
+                      </h3>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                        {bookType.description}
+                      </p>
+                    </div>
+
+                    {/* Bottom Section */}
+                    <div className="mt-8 pt-6 border-t border-white/20">
+                      <button className="w-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-4 py-3 rounded-xl font-semibold transition-all duration-300 transform group-hover:translate-y-[-2px] flex items-center justify-center gap-2">
+                        <BookOpen className="w-4 h-4" />
+                        Lihat Buku
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Separator */}
+          <div className="my-8 flex items-center gap-4">
+            <div className="flex-1 h-px bg-gradient-to-r from-white/0 via-white/20 to-white/0"></div>
+            <span className="text-white/60 text-sm">
+              Atau lihat detail buku
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-white/0 via-white/20 to-white/0"></div>
+          </div>
+        </div>
 
         {/* Search Section */}
         <div className="bg-gradient-to-br from-black/80 to-black/40 backdrop-blur-xl rounded-2xl p-8 mb-12 border border-white/10 shadow-xl">
@@ -212,57 +319,6 @@ function Book() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300"
               />
-            </div>
-          </div>
-
-          {/* Results Info */}
-          <div className="mt-4 text-center">
-            <p className="text-white/60">
-              Menampilkan{" "}
-              <span className="text-white font-semibold">
-                {filteredBooks.length}
-              </span>{" "}
-              dari{" "}
-              <span className="text-white font-semibold">
-                {sheetsBooks.length}
-              </span>{" "}
-              buku
-            </p>
-          </div>
-          {/* Category Filter (same design as Class page) */}
-          <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 sm:p-6 my-6 border border-white/20">
-            <div className="flex items-center gap-2 mb-4">
-              <Filter className="w-4 h-4 text-red-500" />
-              <h3 className="text-lg font-semibold text-white">
-                Filter Kategori
-              </h3>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => {
-                    setSelectedCategory(category);
-                    setCurrentPage(1);
-                  }}
-                  className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
-                    selectedCategory === category
-                      ? "bg-red-600 text-white"
-                      : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
-                  } border border-white/20`}
-                >
-                  {category}
-                  <span className="ml-1 text-xs opacity-75">
-                    {category === "All"
-                      ? `(${sheetsBooks.length})`
-                      : `(${
-                          sheetsBooks.filter(
-                            (b) => (b.category || "").toString() === category
-                          ).length
-                        })`}
-                  </span>
-                </button>
-              ))}
             </div>
           </div>
         </div>
@@ -297,7 +353,7 @@ function Book() {
 
         {/* Books Grid */}
         {!loading && !error && (
-          <div>
+          <div data-books-section>
             {/* Results Info */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
               <div>
